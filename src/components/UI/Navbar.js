@@ -2,7 +2,7 @@ import "./Navbar.css";
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-function Navbar({ onClick, name }) {
+function Navbar({ onLogout, name }) {
 	const activeClass = "navbar-button navbar-button-active button-loggedin";
 
 	return (
@@ -26,7 +26,7 @@ function Navbar({ onClick, name }) {
 			</NavLink>
 			<button
 				className="navbar-button button-loggedin logout-button"
-				onClick={onClick}
+				onClick={onLogout}
 			>
 				Logout
 			</button>

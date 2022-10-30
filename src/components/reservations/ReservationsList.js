@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { realTimeReservations } from "../../redux/slices/restaurant";
 import ReservationListItem from "./ReservationListItem";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
+import { changeReservationStatus } from "../../util/storage";
 
 function ReservationsList() {
 	const [loaded, setLoaded] = useState(false);
@@ -81,6 +82,10 @@ function ReservationsList() {
 					reservationDate={reservation.reservationDate}
 					table={reservation.table}
 					onDelete={() => deleteReservationHandler(reservation)}
+					confirmed={reservation.confirmed}
+					cancelled={reservation.cancelled}
+					onConfirm={() => changeReservationStatus(reservation, true, false)}
+					onCancel={() => changeReservationStatus(reservation, false, true)}
 				/>
 			</CSSTransition>
 		);

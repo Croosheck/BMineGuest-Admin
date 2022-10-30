@@ -8,10 +8,25 @@ function ReservationListItem({
 	reservationDate,
 	table,
 	onDelete,
+	confirmed,
+	cancelled,
+	onConfirm,
+	onCancel,
 }) {
 	const people = table.tSeats === 1 ? "guest" : "guests";
 
 	function openReservationHandler() {}
+
+	function getReservationStatusHandler() {
+		if (!confirmed && !cancelled)
+			return <div className="reservartion-status --pending">Pending</div>;
+		if (confirmed)
+			return <div className="reservartion-status --confirmed">Confirmed</div>;
+		if (cancelled)
+			return <div className="reservartion-status --cancelled">Cancelled</div>;
+	}
+
+	const reservationStatus = getReservationStatusHandler();
 
 	return (
 		<div className={"reservation-container"} onClick={openReservationHandler}>
@@ -37,10 +52,25 @@ function ReservationListItem({
 						<div className="xPrice">{extrasTotalPrice}$</div>
 					</div>
 				</div>
+				<div className="reservation-status-container">{reservationStatus}</div>
 				<div className="reservation-options">
 					<div className="dropdown">
 						<button className="dropbtn">Options</button>
 						<div className="dropdown-content">
+							<div className="dropdown-content-btns-inner-container">
+								<button
+									className="dropdown-content-btn dropdown-btn-left"
+									onClick={onConfirm}
+								>
+									Confirm
+								</button>
+								<button
+									className="dropdown-content-btn dropdown-btn-right"
+									onClick={onCancel}
+								>
+									Cancel
+								</button>
+							</div>
 							<button className="reservation-delete-btn" onClick={onDelete}>
 								Delete
 							</button>

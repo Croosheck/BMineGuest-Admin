@@ -97,6 +97,29 @@
 	font-weight: 600;
 }
 
+.reservation-status-container {
+	color: black;
+}
+
+.reservartion-status {
+	margin: 5px 5px;
+	padding: 10px 10px;
+	border-radius: 20px;
+	font-weight: 600;
+	width: 100%;
+	text-align: center;
+}
+.--pending {
+	background-color: #5392ffba;
+}
+.--confirmed {
+	background-color: #d1fe4b94;
+}
+.--cancelled {
+	background-color: #ff4629a7;
+}
+
+/* RESERVATION OPTIONS */
 .dropdown {
 	position: relative;
 	display: inline-block;
@@ -105,7 +128,7 @@
 .dropbtn {
 	background-color: #5392ff;
 	color: white;
-	padding: 12px 20px;
+	padding: 12px 30px;
 	font-size: 16px;
 	border: none;
 	cursor: pointer;
@@ -119,6 +142,8 @@
 	z-index: 1;
 	border-radius: 5px;
 	padding: 10px 0px;
+
+	/* background-color: #98beff; */
 }
 
 @keyframes dropdownAnimationEnter {
@@ -141,6 +166,44 @@
 .dropdown:hover .dropbtn {
 	background-color: #98beff;
 	scale: 1.05;
+}
+
+.dropdown-content-btns-inner-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.dropdown-content-btn {
+	padding: 8px 5px;
+	width: 50%;
+	font-size: 10px;
+	font-weight: 600;
+	border-width: 0;
+	cursor: pointer;
+	transition: ease-in-out 0.15s;
+}
+.dropdown-content-btn:hover {
+	scale: 1.15;
+}
+.dropdown-btn-left {
+	border-radius: 8px 0px 0px 8px;
+	background-color: #dbff25a9;
+	color: white;
+}
+.dropdown-btn-left:hover {
+	border-radius: 8px;
+	background-color: #daff23;
+	color: black;
+}
+.dropdown-btn-right {
+	border-radius: 0px 8px 8px 0px;
+	background-color: #64a2ff9e;
+}
+.dropdown-btn-right:hover {
+	border-radius: 8px;
+	background-color: hsl(231, 100%, 60%);
+	color: white;
 }
 
 .reservation-delete-btn {

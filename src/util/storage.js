@@ -7,6 +7,7 @@ import {
 	getDocs,
 	query,
 	onSnapshot,
+	updateDoc,
 } from "firebase/firestore";
 
 export async function getReservations() {
@@ -40,4 +41,38 @@ export function getRealTimeReservations() {
 	});
 
 	return availableRestaurants;
+}
+
+export async function changeReservationStatus(
+	reservation,
+	confirmed,
+	cancelled
+) {
+	await updateDoc(
+		doc(
+			db,
+			"restaurants",
+			auth.currentUser.uid,
+			"reservations",
+			reservation.filename
+		),
+		{
+			confirmed: confirmed,
+			cancelled: cancelled,
+		}
+	);
+
+	await updateDoc(
+		doc(
+			db,
+			"users",
+			reservation.clientsUid,
+			"reservations",
+			reservation.filename
+		),
+		{
+			confirmed: confirmed,
+			cancelled: cancelled,
+		}
+	);
 }

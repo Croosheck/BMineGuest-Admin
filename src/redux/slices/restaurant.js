@@ -1,12 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import {
-	getDoc,
-	doc,
-	getDocs,
-	collection,
-	query,
-	onSnapshot,
-} from "firebase/firestore";
+import { getDoc, doc } from "firebase/firestore";
 import { auth, db } from "../../firebase";
 
 export const getRestaurant = createAsyncThunk(

@@ -16,19 +16,20 @@
 	align-items: center;
 	margin: 5px 10px;
 	padding: 0 15px;
-	background-color: rgb(124, 183, 255);
+	background-color: rgb(67, 134, 215);
 	border-radius: 20px;
 	border-width: 0;
 	cursor: pointer;
 	transition: 0.3s ease-in-out;
-	opacity: 0.5;
+	opacity: 0.6;
+	color: white;
 }
 
 .navbar-button-active {
-	padding: 0 30px;
-	min-width: 22%;
+	/* padding: 0 30px; */
+	/* min-width: 18%; */
 	background-color: rgb(255, 255, 255);
-	font-weight: 600;
+	color: black;
 	opacity: 1;
 }
 
@@ -37,7 +38,7 @@
 }
 
 .navbar-button:hover {
-	background-color: rgb(255, 255, 255);
+	background-color: rgba(231, 185, 185, 0.893);
 }
 
 .logout-button {
@@ -50,5 +51,4 @@
 }
 .logout-button:hover {
 	background-color: rgb(255, 0, 0);
-	box-shadow: 1px 1px 0 0 rgb(255, 116, 116);
 }

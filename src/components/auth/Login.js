@@ -1,5 +1,5 @@
 import "./Login.css";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef } from "react";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
@@ -23,8 +23,6 @@ function Login() {
 			enteredEmail,
 			enteredPassword
 		);
-
-		console.log(response);
 	}
 
 	return (

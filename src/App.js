@@ -1,7 +1,8 @@
+import "./App.css";
 import { getAuth, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./App.css";
+
 import Login from "./components/auth/Login";
 import ReservationsList from "./components/reservations/ReservationsList";
 import Navbar from "./components/UI/Navbar";
@@ -13,7 +14,7 @@ import {
 	realTimeReservations,
 } from "./redux/slices/restaurant";
 
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState({
@@ -64,7 +65,10 @@ function App() {
 			<div className="app-container">
 				<div className="inner-container">
 					<div className="box-container">
-						<Login />
+						<Routes>
+							<Route path="/*" element={<Navigate replace to="/login" />} />
+							<Route path="/login" element={<Login />} />
+						</Routes>
 					</div>
 				</div>
 			</div>
@@ -74,16 +78,18 @@ function App() {
 	if (isLoggedIn.loggedIn) {
 		return (
 			<div className="app-container">
-				<BrowserRouter>
-					<Navbar name={name} onClick={logoutHandler} />
-					<div className="inner-container">
-						<Routes>
-							<Route path="/" element={<ReservationsList />} />
-							<Route path="/reservations" element={<ReservationsList />} />
-							<Route path="/manager" element={<Manager />} />
-						</Routes>
-					</div>
-				</BrowserRouter>
+				<Navbar name={name} onLogout={logoutHandler} />
+				<div className="inner-container">
+					<Routes>
+						<Route
+							path="/*"
+							element={<Navigate replace to="/reservations" />}
+						/>
+						<Route path="/" element={<ReservationsList />} />
+						<Route path="/reservations" element={<ReservationsList />} />
+						<Route path="/manager" element={<Manager />} />
+					</Routes>
+				</div>
 			</div>
 		);
 	}
