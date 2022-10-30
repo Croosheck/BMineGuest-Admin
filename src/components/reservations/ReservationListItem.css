@@ -1,0 +1,161 @@
+/*/// hover animation gradients ///*/
+@property --gradientBackground1 {
+	syntax: "<color>";
+	initial-value: rgb(255, 255, 255);
+	inherits: false;
+}
+@property --gradientBackground2 {
+	syntax: "<color>";
+	initial-value: rgb(220, 220, 220);
+	inherits: false;
+}
+@property --gradientBackground3 {
+	syntax: "<color>";
+	initial-value: rgb(255, 255, 255);
+	inherits: false;
+}
+
+.reservation-container {
+	display: flex;
+	align-items: flex-start;
+	justify-items: flex-start;
+	padding: 10px 0;
+}
+
+.reservation-inner-container {
+	display: flex;
+	flex-direction: row;
+	width: 100vw;
+	padding: 20px 15px;
+	margin: 5px 10px;
+	border-radius: 40px;
+	box-shadow: 2px 6px 10px 3px rgba(0, 0, 0, 0.232);
+	transition: ease-in-out 0.3s, --gradientBackground1 0.4s,
+		--gradientBackground2 0.5s, --gradientBackground3 0.8s;
+
+	background: linear-gradient(
+		90deg,
+		var(--gradientBackground1) 0%,
+		var(--gradientBackground2) 50%,
+		var(--gradientBackground3) 100%
+	);
+}
+
+.reservation-inner-container:hover {
+	--gradientBackground1: rgba(159, 123, 192, 0.737);
+	--gradientBackground2: rgba(152, 210, 255, 0.891);
+	--gradientBackground3: rgba(161, 48, 137, 0.827);
+	margin: 5px 10px;
+	box-shadow: 2px 6px 10px 3px rgba(48, 69, 255, 0.503);
+}
+
+.reservation-details {
+	width: 70%;
+	scale: 0.95;
+}
+.reservation-options {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 30%;
+}
+
+.reservation-detail {
+	display: flex;
+	flex-direction: row;
+	font-size: 20px;
+	color: black;
+}
+
+/* .--name {} */
+.name {
+	font-weight: 600;
+}
+
+/* .--email {} */
+.email {
+	transition: ease-in-out 0.15s;
+	font-weight: 600;
+	color: rgb(80, 0, 217);
+}
+.email:hover {
+	color: rgb(197, 166, 255);
+}
+
+/* .--xPrice {} */
+.xPrice {
+	font-weight: 600;
+}
+
+/* .--date {} */
+.date {
+	font-weight: 600;
+}
+
+/* .--table {} */
+.table {
+	font-weight: 600;
+}
+
+.dropdown {
+	position: relative;
+	display: inline-block;
+	transition: ease-in-out 0.2s;
+}
+.dropbtn {
+	background-color: #5392ff;
+	color: white;
+	padding: 12px 20px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+	border-radius: 10px;
+}
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: transparent;
+	width: 100%;
+	z-index: 1;
+	border-radius: 5px;
+	padding: 10px 0px;
+}
+
+@keyframes dropdownAnimationEnter {
+	from {
+		opacity: 0;
+		transform: translateY(-30%);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.dropdown:hover .dropdown-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	animation: dropdownAnimationEnter 0.4s;
+}
+.dropdown:hover .dropbtn {
+	background-color: #98beff;
+	scale: 1.05;
+}
+
+.reservation-delete-btn {
+	margin: 5px 0px;
+	padding: 6px 0px;
+	border-radius: 8px;
+	border-width: 0;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: ease-in-out 0.1s;
+	background-color: rgb(255, 68, 68);
+}
+.reservation-delete-btn:hover {
+	background-color: rgb(220, 0, 0);
+	color: white;
+	scale: 1.1;
+}

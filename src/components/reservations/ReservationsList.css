@@ -1,0 +1,43 @@
+.reservationsList-container {
+	/* background-color: rgb(73, 18, 18); */
+	background-color: rgb(255, 255, 255);
+	box-sizing: border-box;
+	width: 100%;
+	height: 80%;
+	border-top: 1px solid black;
+	border-bottom: 1px solid black;
+	overflow: auto;
+	overflow-x: hidden;
+	transition: ease-in-out 0.5s;
+	display: flex;
+	align-items: center;
+}
+
+.reservations-list {
+	height: 95%;
+	overflow: auto;
+	overflow-x: hidden;
+	scroll-behavior: smooth;
+}
+
+.item-enter {
+	opacity: 0;
+	transform: translateX(500px);
+}
+.item-enter-active {
+	opacity: 1;
+	transform: translateX(0);
+	transition: opacity 800ms ease-out, transform 700ms ease-out;
+}
+.item-exit-active {
+	opacity: 0;
+	transform: translateX(-1000px);
+	transition: opacity 600ms ease-out, transform 700ms ease-out;
+}
+
+.empty-list {
+	color: black;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
