@@ -32,7 +32,8 @@ function App() {
 		getAuth().onAuthStateChanged((user) => {
 			if (!user) {
 				setIsLoggedIn({ loaded: true, loggedIn: false });
-			} else {
+			}
+			if (user) {
 				setIsLoggedIn({ loaded: true, loggedIn: true });
 			}
 		});
@@ -53,8 +54,8 @@ function App() {
 	if (!isLoggedIn.loaded) {
 		return (
 			<div className="app-container">
-				<div className="inner-container">
-					<div className="box-container">LOADING...</div>
+				<div className="inner-container login-container">
+					<div className="box-container ">LOADING...</div>
 				</div>
 			</div>
 		);
@@ -63,7 +64,7 @@ function App() {
 	if (!isLoggedIn.loggedIn) {
 		return (
 			<div className="app-container">
-				<div className="inner-container">
+				<div className="inner-container login-container">
 					<div className="box-container">
 						<Routes>
 							<Route path="/*" element={<Navigate replace to="/login" />} />
@@ -78,14 +79,13 @@ function App() {
 	if (isLoggedIn.loggedIn) {
 		return (
 			<div className="app-container">
-				<Navbar name={name} onLogout={logoutHandler} />
 				<div className="inner-container">
+					<Navbar name={name} onLogout={logoutHandler} />
 					<Routes>
 						<Route
 							path="/*"
 							element={<Navigate replace to="/reservations" />}
 						/>
-						<Route path="/" element={<ReservationsList />} />
 						<Route path="/reservations" element={<ReservationsList />} />
 						<Route path="/manager" element={<Manager />} />
 					</Routes>

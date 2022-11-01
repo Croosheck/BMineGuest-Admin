@@ -1,13 +1,12 @@
 .navbar-container {
 	display: flex;
 	flex-direction: row;
-	height: 50px;
-	position: fixed;
+	position: sticky;
 	top: 0;
 	width: 100%;
 	z-index: 9999;
 	transition: 0.3s ease-in-out;
-	background-color: rgb(24, 23, 88);
+	background-color: rgb(95, 92, 152);
 }
 
 .navbar-button {
@@ -21,13 +20,16 @@
 	border-width: 0;
 	cursor: pointer;
 	transition: 0.3s ease-in-out;
-	opacity: 0.6;
+	opacity: 0.7;
 	color: white;
+	height: 40px;
+}
+
+.restaurant-logo {
+	opacity: 1;
 }
 
 .navbar-button-active {
-	/* padding: 0 30px; */
-	/* min-width: 18%; */
 	background-color: rgb(255, 255, 255);
 	color: black;
 	opacity: 1;
@@ -38,7 +40,11 @@
 }
 
 .navbar-button:hover {
-	background-color: rgba(231, 185, 185, 0.893);
+	background-color: rgb(100, 229, 255);
+}
+
+.restaurant-logo:hover {
+	background-color: rgb(36, 146, 255);
 }
 
 .logout-button {
@@ -46,7 +52,7 @@
 	background-color: rgb(255, 59, 59);
 	color: white;
 	font-weight: 600;
-	font-size: 18px;
+	font-size: 15px;
 	padding: 5px 15px;
 }
 .logout-button:hover {

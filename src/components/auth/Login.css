@@ -1,22 +1,28 @@
 .container {
 	display: flex;
-	height: 40vh;
+	height: 35vh;
 	flex-direction: column;
 	justify-content: space-around;
+}
+
+.container h2 {
+	text-align: center;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .inputs-container {
-	min-height: 150px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
+	align-items: center;
 }
 
 .input-field {
-	height: 25px;
-	border-radius: 10px;
+	height: 27px;
+	border-radius: 5px;
 	padding: 5px 5px;
 	margin: 8px 0;
+	width: 140%;
 }
 
 .buttons-container {
@@ -30,17 +36,20 @@
 }
 
 .button {
-	width: 60%;
-	border-width: 1.5px;
-	border-radius: 20px;
+	font-family: cursive;
+	width: 200%;
+	border-radius: 15px;
+	border: 0.5px solid white;
 	background-color: transparent;
-	padding: 6px 0;
+	background-color: rgba(75, 65, 185, 0.593);
+	padding: 5px 0;
 	cursor: pointer;
 	color: #ffffff;
-	transition: 0.2s ease-in-out;
+	transition: 0.15s ease-in-out;
+	font-size: 16px;
 }
 
 .button:hover {
-	background-color: rgb(175, 215, 251);
-	color: #000000;
+	background-color: rgb(35, 4, 72);
+	box-shadow: 0 0 3px 1px white;
 }

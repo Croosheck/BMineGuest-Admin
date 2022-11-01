@@ -33,22 +33,22 @@ function ReservationListItem({
 			<div className="reservation-inner-container">
 				<div className="reservation-details">
 					<div className="reservation-detail --name">
-						Reservation for:&nbsp;<div className="name">{clientsName}</div>
+						👤&nbsp;<div className="name">{clientsName}</div>
 					</div>
 					<div className="reservation-detail --email">
-						Guest's Email:&nbsp;
+						📧&nbsp;
 						<a href={`mailto:${clientsEmail}`} className="email">
 							{clientsEmail}
 						</a>
 					</div>
 					<div className="reservation-detail --date">
-						Reservation Date:&nbsp;<div className="date">{reservationDate}</div>
+						📆&nbsp;<div className="date">{reservationDate}</div>
 					</div>
 					<div className="reservation-detail --table">
-						For&nbsp;<div className="table">{table.tSeats}</div>&nbsp;{people}
+						👥&nbsp;<div className="table">{table.tSeats}</div>&nbsp;{people}
 					</div>
 					<div className="reservation-detail --xPrice">
-						Extras Total Price:&nbsp;
+						💰&nbsp;
 						<div className="xPrice">{extrasTotalPrice}$</div>
 					</div>
 				</div>

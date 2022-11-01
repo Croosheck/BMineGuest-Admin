@@ -68,7 +68,7 @@ function ReservationsList() {
 	}
 
 	if (!loaded) {
-		return <div className="empty-list">Loading...</div>;
+		return <div className="empty-list-loading">Loading...</div>;
 	}
 
 	const itemsList = reservationsList.map((reservation, index) => {
@@ -91,14 +91,19 @@ function ReservationsList() {
 		);
 	});
 
-	if (!itemsList.length > 0 && loaded) {
-		return <div className=" empty-list">No reservations yet!</div>;
+	if (itemsList.length === 0 && loaded) {
+		return (
+			<div className="reservationsList-container reservations-no-data">
+				No active reservations yet.
+			</div>
+		);
 	}
 
 	const reversedItemsList = itemsList.slice(0).reverse();
 
 	return (
 		<div className="reservationsList-container">
+			{/* <div style={{ background: "#cccccc", height: 100, width: "100%" }}></div> */}
 			<TransitionGroup className="reservations-list" component="ul">
 				{reversedItemsList}
 			</TransitionGroup>

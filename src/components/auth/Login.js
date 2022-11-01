@@ -18,16 +18,12 @@ function Login() {
 		let enteredEmail = emailRef.current.value;
 		let enteredPassword = passwordRef.current.value;
 
-		const response = await signInWithEmailAndPassword(
-			auth,
-			enteredEmail,
-			enteredPassword
-		);
+		await signInWithEmailAndPassword(auth, enteredEmail, enteredPassword);
 	}
 
 	return (
 		<div className="container">
-			<h2>Sign In to Your Profile</h2>
+			<h2>Sign In</h2>
 			<form className="inputs-container" onSubmit={submitHandler}>
 				<input
 					className="input-field"

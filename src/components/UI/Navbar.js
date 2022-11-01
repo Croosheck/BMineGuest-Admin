@@ -6,8 +6,8 @@ function Navbar({ onLogout, name }) {
 	const activeClass = "navbar-button navbar-button-active button-loggedin";
 
 	return (
-		<header className="navbar-container">
-			<div className="navbar-button">{name}</div>
+		<div className="navbar-container">
+			<div className="navbar-button restaurant-logo">[restaurant name]</div>
 			<NavLink
 				to="/reservations"
 				className={(navData) =>
@@ -30,7 +30,7 @@ function Navbar({ onLogout, name }) {
 			>
 				Logout
 			</button>
-		</header>
+		</div>
 	);
 }
 
