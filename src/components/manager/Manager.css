@@ -1,5 +1,4 @@
 .manager-container {
-	background-color: rgb(232, 232, 232);
 	box-sizing: border-box;
 	height: 100%;
 	overflow: auto;
@@ -15,11 +14,32 @@
 }
 
 .manager-manage {
-	background-color: rgb(185, 185, 185);
-
-	width: calc(100vw * 0.45);
-	height: calc(100vw * 0.2);
 	margin: 20px 0;
-	border: 3px solid black;
-	border-radius: 20px;
+	border-radius: 10px;
+	transition: ease-in-out 0.2s;
+	overflow: hidden;
+	background-color: rgb(255, 255, 255);
+}
+
+@media only screen and (min-width: 900px) {
+	.manager-manage {
+		width: calc(100vw * 0.45);
+		height: calc(100vw * 0.2);
+	}
+}
+@media only screen and (max-width: 900px) {
+	.manager-manage {
+		width: calc(100vw * 0.7);
+		height: calc(100vw * 0.35);
+	}
+}
+
+.manage-available-extras-list {
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	display: flex;
+	flex-wrap: wrap;
+	overflow: auto;
+	overflow-x: none;
 }

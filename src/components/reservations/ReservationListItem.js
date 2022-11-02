@@ -29,7 +29,7 @@ function ReservationListItem({
 	const reservationStatus = getReservationStatusHandler();
 
 	return (
-		<div className={"reservation-container"} onClick={openReservationHandler}>
+		<div className="reservation-container" onClick={openReservationHandler}>
 			<div className="reservation-inner-container">
 				<div className="reservation-details">
 					<div className="reservation-detail --name">

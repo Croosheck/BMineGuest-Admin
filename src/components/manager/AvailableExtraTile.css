@@ -1,0 +1,136 @@
+.available-extras-item {
+	position: relative;
+	box-sizing: border-box;
+	width: 20%;
+	height: 45%;
+	margin: 2% 2%;
+	border-radius: 10px;
+	overflow: hidden;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	opacity: 0.7;
+	transition: 0.2s ease-in-out;
+	cursor: pointer;
+	z-index: 1;
+
+	animation: availableExtraItem 1.5s;
+}
+@keyframes availableExtraItem {
+	from {
+		opacity: 0;
+		scale: 0.5;
+	}
+	to {
+		opacity: 0.7;
+		scale: 1;
+	}
+}
+
+.available-extras-item:hover {
+	opacity: 1;
+	scale: 1.05;
+}
+.extras-item-picture {
+	background-color: rgb(255, 255, 255);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 85%;
+}
+img {
+	height: 90%;
+	animation: availableExtraItem 1s;
+}
+.extras-item-label-container {
+	background-color: rgb(29, 17, 60);
+	border-radius: 5px;
+	width: 100%;
+	height: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-overflow: ellipsis;
+	font-weight: bold;
+}
+.extras-item-label {
+	text-align: center;
+	font-size: 70%;
+}
+
+.extras-nofile {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	font-size: 70%;
+	color: black;
+	margin: 50% 0;
+}
+
+/* Dropdown */
+.availableExtra-dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #183560d7;
+	top: 0%;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	cursor: default;
+	animation: dropdownAnimation 0.5s;
+}
+@keyframes dropdownAnimation {
+	from {
+		top: 100%;
+		opacity: 0;
+	}
+	to {
+		top: 0%;
+		opacity: 1;
+	}
+}
+
+.availableExtra-dropdown-inner-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.availableExtra-dropdown-inner-content input {
+	width: 60%;
+	padding: 2px 5px;
+	text-align: center;
+	border-radius: 5px;
+}
+.availableExtra-dropdown-inner-content button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+	cursor: pointer;
+	border: 2px solid white;
+	color: white;
+	padding: 2px 0;
+	border-radius: 5px;
+	margin-top: 10px;
+	background-color: transparent;
+	opacity: 0.8;
+	transition: ease-in-out 0.2s;
+}
+.availableExtra-dropdown-inner-content button:hover {
+	background-color: rgba(255, 255, 255, 0.123);
+	opacity: 1;
+}
+.availableExtra-dropdown-inner-content h6 {
+	margin-bottom: 5px;
+}
+
+.available-extras-zIndex,
+.available-extras-dropdown-active {
+	display: flex;
+	justify-content: center;
+	overflow: hidden;
+	opacity: 1;
+	scale: 1.05;
+}

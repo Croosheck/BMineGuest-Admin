@@ -25,6 +25,7 @@ export const restaurantSlice = createSlice({
 			table: {},
 		},
 		reservationsList: [],
+		availableExtrasGlobal: [],
 	},
 	reducers: {
 		realTimeReservations: (state, { payload }) => {
@@ -32,6 +33,22 @@ export const restaurantSlice = createSlice({
 		},
 		clearRestaurantData: (state) => {
 			state.currentRestaurant = "";
+		},
+		setAvailableExtrasGlobal: (state, { payload }) => {
+			state.availableExtrasGlobal = [...state.availableExtrasGlobal, payload];
+		},
+		resetAvailableExtrasGlobal: (state) => {
+			state.availableExtrasGlobal = [];
+		},
+		pickedExtra: (state, { payload }) => {
+			const pickedExtraIndex = state.availableExtrasGlobal.findIndex(
+				(extra) => extra.xName === payload
+			);
+
+			state.availableExtrasGlobal[pickedExtraIndex].xPicked = true;
+		},
+		resetPickedExtras: (state, { payload }) => {
+			state.availableExtrasGlobal = [...payload];
 		},
 	},
 	extraReducers: {
@@ -41,7 +58,13 @@ export const restaurantSlice = createSlice({
 	},
 });
 
-export const { realTimeReservations, clearRestaurantData } =
-	restaurantSlice.actions;
+export const {
+	realTimeReservations,
+	clearRestaurantData,
+	setAvailableExtrasGlobal,
+	resetAvailableExtrasGlobal,
+	pickedExtra,
+	resetPickedExtras,
+} = restaurantSlice.actions;
 
 export default restaurantSlice.reducer;

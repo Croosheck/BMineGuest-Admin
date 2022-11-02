@@ -1,0 +1,73 @@
+/* Dropdown */
+.restaurantExtra-dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: #183560d7;
+	top: 0%;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	cursor: default;
+	animation: dropRightAnimation 0.5s;
+}
+@keyframes dropRightAnimation {
+	from {
+		right: 100%;
+		opacity: 0;
+	}
+	to {
+		right: 0%;
+		opacity: 1;
+	}
+}
+
+.restaurantExtra-dropdown-inner-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.restaurantExtra-dropdown-inner-content input {
+	width: 60%;
+	padding: 2px 5px;
+	text-align: center;
+	border-radius: 5px;
+}
+
+.restaurantExtra-buttons-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+.restaurantExtra-dropdown-inner-content button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 50%;
+	margin: 0 3px;
+	cursor: pointer;
+	border: 2px solid white;
+	color: white;
+	padding: 2px 0;
+	border-radius: 5px;
+	margin-top: 10px;
+	background-color: transparent;
+	opacity: 0.8;
+	transition: ease-in-out 0.2s;
+}
+.restaurantExtra-dropdown-inner-content button:hover {
+	background-color: rgba(255, 255, 255, 0.123);
+	opacity: 1;
+}
+.restaurantExtra-dropdown-inner-content h6 {
+	margin-bottom: 5px;
+}
+
+.available-extras-item:hover .restaurantExtra-dropdown-content {
+	display: flex;
+	justify-content: center;
+	overflow: hidden;
+	opacity: 1;
+}
