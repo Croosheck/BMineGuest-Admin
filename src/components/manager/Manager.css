@@ -1,9 +1,8 @@
 .manager-container {
 	box-sizing: border-box;
-	height: 100%;
 	overflow: auto;
 	overflow-x: hidden;
-	transition: ease-in-out 0.5s;
+	transition: ease-in-out 0.4s;
 }
 
 .manager-inner-container {
@@ -23,14 +22,14 @@
 
 @media only screen and (min-width: 900px) {
 	.manager-manage {
-		width: calc(100vw * 0.45);
+		width: calc(100vw * 0.48);
 		height: calc(100vw * 0.2);
 	}
 }
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 1020px) {
 	.manager-manage {
-		width: calc(100vw * 0.7);
-		height: calc(100vw * 0.35);
+		width: calc(100vw * 0.85);
+		height: calc(100vw * 0.45);
 	}
 }
 

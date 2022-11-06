@@ -9,7 +9,7 @@ function Login() {
 	const passwordRef = useRef();
 
 	useEffect(() => {
-		emailRef.current.value = "restaurant4@test.com";
+		emailRef.current.value = "restaurant3@test.com";
 		passwordRef.current.value = "123123";
 	}, []);
 

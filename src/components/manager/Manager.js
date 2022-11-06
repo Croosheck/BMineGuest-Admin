@@ -80,11 +80,15 @@ function Manager() {
 
 		const restaurantRef = doc(db, "restaurants", auth.currentUser.uid);
 
+		const itemPrice = !priceRef.current.value
+			? 0
+			: parseFloat(priceRef.current.value).toFixed(2);
+
 		await updateDoc(restaurantRef, {
 			extras: arrayUnion({
 				xName: item.xName,
 				xFileName: item.xFilename,
-				xPrice: priceRef.current.value,
+				xPrice: Number(itemPrice),
 				xAvailability: item.xAvailability,
 				xPicked: false,
 			}),
@@ -137,6 +141,7 @@ function Manager() {
 								<RestaurantExtraTile
 									key={index}
 									label={item.xName}
+									xPrice={item.xPrice}
 									url={extrasImages[item.xFileName.slice(0, -4)]}
 									onDelete={(e) => onDeleteExtraHandler(e, item)}
 								/>
@@ -144,8 +149,8 @@ function Manager() {
 						})}
 					</div>
 				</div>
-				<div className="manager-manage"></div>
-				<div className="manager-manage"></div>
+				{/* <div className="manager-manage"></div> */}
+				{/* <div className="manager-manage"></div> */}
 			</div>
 		</div>
 	);

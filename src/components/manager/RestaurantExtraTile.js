@@ -9,6 +9,7 @@ function RestaurantExtraTile({
 	onClick,
 	onSubmit,
 	onDelete,
+	xPrice,
 }) {
 	const priceRef = useRef();
 
@@ -20,7 +21,10 @@ function RestaurantExtraTile({
 
 	return (
 		<>
-			<div className="available-extras-item" onClick={onClick}>
+			<div
+				className="available-extras-item restaurant-extras-item"
+				onClick={onClick}
+			>
 				<div className="extras-item-picture">{extraImage}</div>
 				<div className="extras-item-label-container">
 					<p className="extras-item-label">{label}</p>
@@ -28,12 +32,11 @@ function RestaurantExtraTile({
 				<div className="restaurantExtra-dropdown-content">
 					<form
 						className="restaurantExtra-dropdown-inner-content"
-						onSubmit={(e, value) => onSubmit(e, priceRef, value)}
+						// onSubmit={(e, value) => onSubmit(e, priceRef, value)}
 					>
-						<h6>Price (xx.yy):</h6>
-						<input ref={priceRef} />
+						<h6>Price: {xPrice}</h6>
 						<div className="restaurantExtra-buttons-container">
-							<button type="submit">Add</button>
+							{/* <button type="submit">Add</button> */}
 							<button onClick={(e) => onDelete(e)}>Delete</button>
 						</div>
 					</form>

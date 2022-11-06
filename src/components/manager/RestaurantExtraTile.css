@@ -1,3 +1,6 @@
+.restaurant-extras-item {
+	cursor: default;
+}
 /* Dropdown */
 .restaurantExtra-dropdown-content {
 	display: none;
@@ -39,18 +42,17 @@
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
-	width: 100%;
 }
 .restaurantExtra-dropdown-inner-content button {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 50%;
+	width: 100%;
 	margin: 0 3px;
 	cursor: pointer;
 	border: 2px solid white;
 	color: white;
-	padding: 2px 0;
+	padding: 2px 4px;
 	border-radius: 5px;
 	margin-top: 10px;
 	background-color: transparent;
@@ -63,6 +65,7 @@
 }
 .restaurantExtra-dropdown-inner-content h6 {
 	margin-bottom: 5px;
+	font-size: 16px;
 }
 
 .available-extras-item:hover .restaurantExtra-dropdown-content {

@@ -84,8 +84,16 @@ function ReservationsList() {
 					onDelete={() => deleteReservationHandler(reservation)}
 					confirmed={reservation.confirmed}
 					cancelled={reservation.cancelled}
-					onConfirm={() => changeReservationStatus(reservation, true, false)}
-					onCancel={() => changeReservationStatus(reservation, false, true)}
+					callRequest={reservation.callRequest}
+					onConfirm={() =>
+						changeReservationStatus(false, reservation, true, false)
+					}
+					onCancel={() =>
+						changeReservationStatus(false, reservation, false, true)
+					}
+					onCallRequest={() =>
+						changeReservationStatus(true, reservation, false, false)
+					}
 				/>
 			</CSSTransition>
 		);

@@ -39,6 +39,17 @@
 	margin-right: auto;
 }
 
+@media only screen and (max-width: 550px) {
+	.navbar-button:first-child {
+		display: none;
+	}
+	.navbar-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+
 .navbar-button:hover {
 	background-color: rgb(100, 229, 255);
 }

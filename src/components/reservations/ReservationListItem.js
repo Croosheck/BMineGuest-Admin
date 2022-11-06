@@ -10,20 +10,24 @@ function ReservationListItem({
 	onDelete,
 	confirmed,
 	cancelled,
+	callRequest,
 	onConfirm,
 	onCancel,
+	onCallRequest,
 }) {
 	const people = table.tSeats === 1 ? "guest" : "guests";
 
 	function openReservationHandler() {}
 
 	function getReservationStatusHandler() {
-		if (!confirmed && !cancelled)
+		if (!confirmed && !cancelled && !callRequest)
 			return <div className="reservartion-status --pending">Pending</div>;
 		if (confirmed)
 			return <div className="reservartion-status --confirmed">Confirmed</div>;
 		if (cancelled)
 			return <div className="reservartion-status --cancelled">Cancelled</div>;
+		if (!confirmed && !cancelled && callRequest)
+			return <div className="reservartion-status --callRequest">Call Us</div>;
 	}
 
 	const reservationStatus = getReservationStatusHandler();
@@ -71,6 +75,12 @@ function ReservationListItem({
 									Cancel
 								</button>
 							</div>
+							<button
+								className="reservation-callus-btn"
+								onClick={onCallRequest}
+							>
+								Call Us
+							</button>
 							<button className="reservation-delete-btn" onClick={onDelete}>
 								Delete
 							</button>

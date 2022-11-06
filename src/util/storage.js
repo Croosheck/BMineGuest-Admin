@@ -44,6 +44,7 @@ export function getRealTimeReservations() {
 }
 
 export async function changeReservationStatus(
+	callRequest,
 	reservation,
 	confirmed,
 	cancelled
@@ -59,6 +60,7 @@ export async function changeReservationStatus(
 		{
 			confirmed: confirmed,
 			cancelled: cancelled,
+			callRequest: callRequest,
 		}
 	);
 
@@ -73,6 +75,7 @@ export async function changeReservationStatus(
 		{
 			confirmed: confirmed,
 			cancelled: cancelled,
+			callRequest: callRequest,
 		}
 	);
 }

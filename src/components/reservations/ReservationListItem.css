@@ -118,13 +118,19 @@
 .--cancelled {
 	background-color: #ff4629a7;
 }
+.--callRequest {
+	background-color: #f0f0f0a7;
+	box-shadow: 0 2px 5px 0px black;
+}
 
 /* RESERVATION OPTIONS */
 .dropdown {
 	position: relative;
 	display: inline-block;
 	transition: ease-in-out 0.2s;
+	transform: translateY(-40px);
 }
+
 .dropbtn {
 	background-color: #5392ff;
 	color: white;
@@ -221,4 +227,33 @@
 	background-color: rgb(220, 0, 0);
 	color: white;
 	scale: 1.1;
+}
+.reservation-callus-btn {
+	margin: 5px 0px;
+	padding: 6px 0px;
+	border-radius: 8px;
+	border-width: 0;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: ease-in-out 0.1s;
+	background-color: rgb(203, 203, 203);
+}
+.reservation-callus-btn:hover {
+	background-color: rgb(255, 255, 255);
+	scale: 1.1;
+}
+
+@media only screen and (max-width: 650px) {
+	.reservation-detail {
+		font-size: 14px;
+	}
+	.dropdown {
+		scale: 0.7;
+		transform: translateY(-40px);
+	}
+	.reservation-status-container {
+		scale: 0.8;
+		transform: translateY(-10px);
+	}
 }
