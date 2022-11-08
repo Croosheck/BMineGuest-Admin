@@ -25,7 +25,7 @@
 .reservation-inner-container {
 	display: flex;
 	flex-direction: row;
-	width: 100vw;
+	width: 95vw;
 	padding: 20px 15px;
 	margin: 5px 10px;
 	border-radius: 40px;
@@ -39,6 +39,12 @@
 		var(--gradientBackground2) 50%,
 		var(--gradientBackground3) 100%
 	);
+}
+
+@media only screen and (min-width: 900px) {
+	.reservation-inner-container {
+		width: 100vw;
+	}
 }
 
 .reservation-inner-container:hover {
@@ -79,7 +85,7 @@
 	color: rgb(80, 0, 217);
 }
 .email:hover {
-	color: rgb(197, 166, 255);
+	color: rgb(9, 252, 98);
 }
 
 /* .--xPrice {} */
@@ -99,6 +105,7 @@
 
 .reservation-status-container {
 	color: black;
+	width: 170px;
 }
 
 .reservartion-status {
@@ -110,17 +117,20 @@
 	text-align: center;
 }
 .--pending {
-	background-color: #5392ffba;
+	background-color: #5392ff94;
+	box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.567);
 }
 .--confirmed {
 	background-color: #d1fe4b94;
+	box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.567);
 }
 .--cancelled {
-	background-color: #ff4629a7;
+	background-color: #ff462994;
+	box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.567);
 }
 .--callRequest {
-	background-color: #f0f0f0a7;
-	box-shadow: 0 2px 5px 0px black;
+	background-color: #f0f0f094;
+	box-shadow: 2px 2px 3px 0px rgba(0, 0, 0, 0.567);
 }
 
 /* RESERVATION OPTIONS */
@@ -162,6 +172,16 @@
 		transform: translateY(0);
 	}
 }
+@keyframes dropdownAnimationEnterMobile {
+	from {
+		opacity: 0;
+		transform: translateY(60%);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
 
 .dropdown:hover .dropdown-content {
 	display: flex;
@@ -169,6 +189,12 @@
 	justify-content: center;
 	animation: dropdownAnimationEnter 0.4s;
 }
+@media only screen and (max-width: 650px) {
+	.dropdown:hover .dropdown-content {
+		animation: dropdownAnimationEnterMobile 0.4s;
+	}
+}
+
 .dropdown:hover .dropbtn {
 	background-color: #98beff;
 	scale: 1.05;
@@ -237,7 +263,7 @@
 	font-weight: 600;
 	cursor: pointer;
 	transition: ease-in-out 0.1s;
-	background-color: rgb(203, 203, 203);
+	background-color: rgb(230, 201, 201);
 }
 .reservation-callus-btn:hover {
 	background-color: rgb(255, 255, 255);

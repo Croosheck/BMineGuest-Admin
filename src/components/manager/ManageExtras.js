@@ -1,4 +1,4 @@
-import "./Manager.css";
+import "./ManageExtras.css";
 import React, { useEffect, useState } from "react";
 import AvailableExtraTile from "./AvailableExtraTile";
 import { getAuth } from "firebase/auth";
@@ -23,7 +23,7 @@ import {
 } from "../../redux/slices/restaurant";
 import RestaurantExtraTile from "./RestaurantExtraTile";
 
-function Manager() {
+function ManageExtras(props) {
 	const [availableExtras, setAvailableExtras] = useState([]);
 	const [extrasImages, setExtrasImages] = useState({});
 	const [restaurantExtras, setRestaurantExtras] = useState([]);
@@ -111,10 +111,10 @@ function Manager() {
 	}
 
 	return (
-		<div className="manager-container">
-			<div className="manager-inner-container">
-				<div className="manager-manage">
-					<div className="manage-available-extras-list">
+		<div className="manageExtras-container">
+			<div className="manageExtras-inner-container">
+				<div className="manageExtras-manage">
+					<div className="manageExtras-available-extras-list">
 						{availableExtrasGlobal.map((item, index) => {
 							return (
 								<AvailableExtraTile
@@ -134,8 +134,8 @@ function Manager() {
 						})}
 					</div>
 				</div>
-				<div className="manager-manage">
-					<div className="manage-available-extras-list">
+				<div className="manageExtras-manage">
+					<div className="manageExtras-available-extras-list">
 						{restaurantExtras.map((item, index) => {
 							return (
 								<RestaurantExtraTile
@@ -149,11 +149,9 @@ function Manager() {
 						})}
 					</div>
 				</div>
-				{/* <div className="manager-manage"></div> */}
-				{/* <div className="manager-manage"></div> */}
 			</div>
 		</div>
 	);
 }
 
-export default Manager;
+export default ManageExtras;

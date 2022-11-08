@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Login from "./components/auth/Login";
 import ReservationsList from "./components/reservations/ReservationsList";
 import Navbar from "./components/UI/Navbar";
-import Manager from "./components/manager/Manager";
+import ManageExtras from "./components/manager/ManageExtras";
 
 import {
 	clearRestaurantData,
@@ -15,6 +15,7 @@ import {
 } from "./redux/slices/restaurant";
 
 import { Routes, Route, Navigate } from "react-router-dom";
+import ManageRestaurant from "./components/manager/restaurant/ManageRestaurant";
 
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState({
@@ -87,7 +88,8 @@ function App() {
 							element={<Navigate replace to="/reservations" />}
 						/>
 						<Route path="/reservations" element={<ReservationsList />} />
-						<Route path="/manager" element={<Manager />} />
+						<Route path="/extras" element={<ManageExtras />} />
+						<Route path="/restaurant" element={<ManageRestaurant />} />
 					</Routes>
 				</div>
 			</div>

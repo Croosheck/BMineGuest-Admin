@@ -60,12 +60,166 @@
 
 .logout-button {
 	opacity: 1;
-	background-color: rgb(255, 59, 59);
-	color: white;
+	background-color: rgb(209, 209, 209);
 	font-weight: 600;
 	font-size: 15px;
 	padding: 5px 15px;
+	transition: ease-in-out 0.2s;
 }
 .logout-button:hover {
-	background-color: rgb(255, 0, 0);
+	background-color: rgb(255, 255, 255);
+}
+
+/* DROPDOWN */
+
+.navbar-manager {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.nav-dropdown {
+	position: relative;
+	display: inline-block;
+	transition: ease-in-out 0.2s;
+}
+
+.nav-dropbtn {
+	background-color: rgb(67, 134, 215);
+	color: white;
+	padding: 12px 30px;
+	font-size: 16px;
+	border: none;
+	cursor: pointer;
+	border-radius: 20px;
+	transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.2s;
+}
+.nav-dropContent-button {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: rgba(0, 115, 255, 0.642);
+	color: white;
+	padding: 8px 0px;
+	margin: 5px 0;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 5px;
+	transition: ease-in-out 0.2s;
+}
+.nav-dropContent-button:hover {
+	scale: 1.05;
+	background-color: rgb(215, 215, 215);
+	color: black;
+}
+.nav-dropbtn-active {
+	background-color: rgb(215, 215, 215);
+	color: black;
+	opacity: 1;
+}
+
+.nav-dropdown-content {
+	display: none;
+	position: absolute;
+	width: 100%;
+	z-index: 1;
+	border-radius: 0 0 20px 20px;
+	padding: 20px 10px;
+	margin-top: 1px;
+	scale: 1.05;
+
+	background-color: #051f5a;
+}
+
+@keyframes navDropdownAnimationEnter {
+	from {
+		opacity: 0;
+		transform: translateY(-30%);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.nav-dropdown:hover .nav-dropdown-content {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	animation: navDropdownAnimationEnter 0.2s;
+}
+.nav-dropdown:hover .nav-dropbtn {
+	background-color: #051f5a;
+	scale: 1.05;
+	border-radius: 20px 20px 0 0;
+}
+
+.nav-dropdown-content-btns-inner-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+}
+.nav-dropdown-content-btn {
+	padding: 8px 5px;
+	width: 50%;
+	font-size: 10px;
+	font-weight: 600;
+	border-width: 0;
+	cursor: pointer;
+	transition: ease-in-out 0.15s;
+}
+.nav-dropdown-content-btn:hover {
+	scale: 1.15;
+}
+.nav-dropdown-btn-left {
+	border-radius: 8px 0px 0px 8px;
+	background-color: #dbff25a9;
+	color: white;
+}
+.nav-dropdown-btn-left:hover {
+	border-radius: 8px;
+	background-color: #daff23;
+	color: black;
+}
+.nav-dropdown-btn-right {
+	border-radius: 0px 8px 8px 0px;
+	background-color: #64a2ff9e;
+}
+.nav-dropdown-btn-right:hover {
+	border-radius: 8px;
+	background-color: hsl(231, 100%, 60%);
+	color: white;
+}
+
+.nav-reservation-delete-btn {
+	margin: 5px 0px;
+	padding: 6px 0px;
+	border-radius: 8px;
+	border-width: 0;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: ease-in-out 0.1s;
+	background-color: rgb(255, 68, 68);
+}
+.nav-reservation-delete-btn:hover {
+	background-color: rgb(220, 0, 0);
+	color: white;
+	scale: 1.1;
+}
+.nav-reservation-callus-btn {
+	margin: 5px 0px;
+	padding: 6px 0px;
+	border-radius: 8px;
+	border-width: 0;
+	font-size: 16px;
+	font-weight: 600;
+	cursor: pointer;
+	transition: ease-in-out 0.1s;
+	background-color: rgb(230, 201, 201);
+}
+.nav-reservation-callus-btn:hover {
+	background-color: rgb(255, 255, 255);
+	scale: 1.1;
 }

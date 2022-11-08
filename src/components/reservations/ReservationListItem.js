@@ -27,7 +27,9 @@ function ReservationListItem({
 		if (cancelled)
 			return <div className="reservartion-status --cancelled">Cancelled</div>;
 		if (!confirmed && !cancelled && callRequest)
-			return <div className="reservartion-status --callRequest">Call Us</div>;
+			return (
+				<div className="reservartion-status --callRequest">Call Request</div>
+			);
 	}
 
 	const reservationStatus = getReservationStatusHandler();
@@ -79,7 +81,7 @@ function ReservationListItem({
 								className="reservation-callus-btn"
 								onClick={onCallRequest}
 							>
-								Call Us
+								Call Request
 							</button>
 							<button className="reservation-delete-btn" onClick={onDelete}>
 								Delete

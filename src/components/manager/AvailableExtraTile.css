@@ -2,7 +2,7 @@
 	position: relative;
 	box-sizing: border-box;
 	width: 20%;
-	height: 50%;
+	height: 40%;
 	margin: 2% 2.5%;
 	border-radius: 10px;
 	overflow: hidden;
@@ -18,7 +18,7 @@
 	animation: availableExtraItem 1s;
 }
 
-@media only screen and (max-width: 620px) {
+@media only screen and (max-width: 1020px) {
 	.available-extras-item {
 		width: 30%;
 		margin: 2% 1.6666%;
@@ -36,10 +36,6 @@
 	}
 }
 
-.available-extras-item:hover {
-	opacity: 1;
-	scale: 1;
-}
 .extras-item-picture {
 	background-color: rgb(255, 255, 255);
 	display: flex;
@@ -109,6 +105,12 @@ img {
 	text-align: center;
 	border-radius: 5px;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
 .availableExtra-dropdown-inner-content button {
 	display: flex;
 	justify-content: center;

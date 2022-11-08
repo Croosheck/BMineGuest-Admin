@@ -21,10 +21,7 @@ function RestaurantExtraTile({
 
 	return (
 		<>
-			<div
-				className="available-extras-item restaurant-extras-item"
-				onClick={onClick}
-			>
+			<div className="restaurant-extras-item" onClick={onClick}>
 				<div className="extras-item-picture">{extraImage}</div>
 				<div className="extras-item-label-container">
 					<p className="extras-item-label">{label}</p>

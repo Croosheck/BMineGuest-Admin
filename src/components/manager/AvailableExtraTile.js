@@ -31,8 +31,13 @@ function AvailableExtraTile({ label, url, picked, onClick, onSubmit }) {
 						className="availableExtra-dropdown-inner-content"
 						onSubmit={(e, value) => onSubmit(e, priceRef, value)}
 					>
-						<h6>Price (xx.yy):</h6>
-						<input ref={priceRef} />
+						<h6>Price:</h6>
+						<input
+							placeholder="0.00"
+							ref={priceRef}
+							type="number"
+							step={0.01}
+						/>
 						<button type="submit">Add</button>
 					</form>
 				</div>
