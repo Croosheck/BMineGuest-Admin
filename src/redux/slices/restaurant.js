@@ -29,7 +29,24 @@ export const restaurantSlice = createSlice({
 	},
 	reducers: {
 		realTimeReservations: (state, { payload }) => {
-			state.reservationsList = payload;
+			state.reservationsList = payload.map((reservation) => ({
+				...reservation,
+				picked: false,
+			}));
+		},
+		pickedReservation: (state, { payload }) => {
+			const pickedReservationIndex = state.reservationsList.findIndex(
+				(res) => res.filename === payload
+			);
+
+			if (state.reservationsList[pickedReservationIndex].picked === true) {
+				state.reservationsList[pickedReservationIndex].picked = false;
+				return;
+			}
+
+			state.reservationsList.map((reservation) => (reservation.picked = false));
+
+			state.reservationsList[pickedReservationIndex].picked = true;
 		},
 		clearRestaurantData: (state) => {
 			state.currentRestaurant = "";
@@ -60,6 +77,7 @@ export const restaurantSlice = createSlice({
 
 export const {
 	realTimeReservations,
+	pickedReservation,
 	clearRestaurantData,
 	setAvailableExtrasGlobal,
 	resetAvailableExtrasGlobal,

@@ -40,10 +40,8 @@ function ManageExtras(props) {
 		getAuth().onAuthStateChanged((user) => {
 			if (!user) return;
 		});
-		const qAvailExtras = query(collection(db, "extras"));
-		// const qRestExtras = query(doc(db, "restaurants", auth.currentUser.uid));
-		const docRef = doc(db, "extras", auth.currentUser.uid);
 
+		const qAvailExtras = query(collection(db, "extras"));
 		async function getAvailableExtras() {
 			setAvailableExtras([]);
 			const querySnapshot = await getDocs(qAvailExtras);

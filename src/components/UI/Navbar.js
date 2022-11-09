@@ -1,8 +1,6 @@
 import "../reservations/ReservationListItem.css";
 import "./Navbar.css";
 import { NavLink } from "react-router-dom";
-import { db } from "../../firebase";
-import { doc, setDoc } from "firebase/firestore";
 import Logout from "../../assets/icons/logout.svg";
 
 function Navbar({ onLogout, name }) {
@@ -23,7 +21,9 @@ function Navbar({ onLogout, name }) {
 
 	return (
 		<div className="navbar-container">
-			<div className="navbar-button restaurant-logo">[restaurant name]</div>
+			<div className="navbar-button restaurant-logo">
+				{name ? name : "Restaurant Name"}
+			</div>
 			{/* Production Helper */}
 			{/* <button onClick={() => addExtraHandler()}>CLICK</button> */}
 			<NavLink
@@ -67,7 +67,7 @@ function Navbar({ onLogout, name }) {
 				className="navbar-button button-loggedin logout-button"
 				onClick={onLogout}
 			>
-				<img src={Logout} />
+				<img src={Logout} alt="Logout Icon" />
 			</button>
 		</div>
 	);

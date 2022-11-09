@@ -6,18 +6,24 @@ import {
 	query,
 	doc,
 	deleteDoc,
+	getDocs,
 } from "firebase/firestore";
-import { auth, db } from "../../firebase";
+import { auth, db, storage } from "../../firebase";
 
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { realTimeReservations } from "../../redux/slices/restaurant";
+import {
+	pickedReservation,
+	realTimeReservations,
+} from "../../redux/slices/restaurant";
 import ReservationListItem from "./ReservationListItem";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { changeReservationStatus } from "../../util/storage";
+import { getDownloadURL, ref } from "firebase/storage";
 
 function ReservationsList() {
 	const [loaded, setLoaded] = useState(false);
+	const [extrasImgs, setExtrasImgs] = useState({});
 
 	const { reservationsList } = useSelector((state) => state.restaurantReducer);
 
@@ -45,22 +51,48 @@ function ReservationsList() {
 			setLoaded(true);
 			dispatch(realTimeReservations(realTimeReservationsData));
 		});
+
+		const qExtrasImgs = query(collection(db, "extras"));
+		async function getAvailableExtras() {
+			setExtrasImgs({});
+
+			const querySnapshot = await getDocs(qExtrasImgs);
+
+			querySnapshot.forEach(async (doc) => {
+				const extraImg = ref(storage, `extras/${doc.id}.png`);
+
+				const extraImgUrl = await getDownloadURL(extraImg);
+
+				setExtrasImgs((prev) => ({ ...prev, [doc.id]: extraImgUrl }));
+
+				// //For default state (to reset picked item highlight)
+				// setAvailableExtras((prev) => [
+				// 	...prev,
+				// 	{ ...doc.data(), xUrl: extraImgUrl },
+				// ]);
+
+				// dispatch(
+				// 	setAvailableExtrasGlobal({ ...doc.data(), xUrl: extraImgUrl })
+				// );
+			});
+		}
+		getAvailableExtras();
 	}, [dispatch]);
 
-	async function deleteReservatio(collection, uid, filename) {
+	async function deleteReservation(collection, uid, filename) {
 		await deleteDoc(doc(db, collection, uid, "reservations", filename));
 	}
 
 	async function deleteReservationHandler(reservation) {
 		// Delete reservation for the restaurant
-		await deleteReservatio(
+		await deleteReservation(
 			"restaurants",
 			auth.currentUser.uid,
 			reservation.filename
 		);
 
 		// Delete reservation for the client
-		await deleteReservatio(
+		await deleteReservation(
 			"users",
 			reservation.clientsUid,
 			reservation.filename
@@ -81,10 +113,12 @@ function ReservationsList() {
 					extrasTotalPrice={reservation.extrasTotalPrice}
 					reservationDate={reservation.reservationDate}
 					table={reservation.table}
-					onDelete={() => deleteReservationHandler(reservation)}
+					extras={reservation.extras}
+					extrasImgs={extrasImgs}
 					confirmed={reservation.confirmed}
 					cancelled={reservation.cancelled}
 					callRequest={reservation.callRequest}
+					onDelete={() => deleteReservationHandler(reservation)}
 					onConfirm={() =>
 						changeReservationStatus(false, reservation, true, false)
 					}
@@ -94,6 +128,8 @@ function ReservationsList() {
 					onCallRequest={() =>
 						changeReservationStatus(true, reservation, false, false)
 					}
+					reservationPicked={reservation.picked}
+					onClick={() => dispatch(pickedReservation(reservation.filename))}
 				/>
 			</CSSTransition>
 		);

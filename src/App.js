@@ -16,18 +16,19 @@ import {
 
 import { Routes, Route, Navigate } from "react-router-dom";
 import ManageRestaurant from "./components/manager/restaurant/ManageRestaurant";
+import { auth } from "./firebase";
 
 function App() {
+	const dispatch = useDispatch();
 	const [isLoggedIn, setIsLoggedIn] = useState({
 		loaded: false,
 		loggedIn: false,
 	});
+	const [restaurantEmail, setRestaurantEmail] = useState();
 
 	const { name } = useSelector(
 		(state) => state.restaurantReducer.currentRestaurant
 	);
-
-	const dispatch = useDispatch();
 
 	useEffect(() => {
 		getAuth().onAuthStateChanged((user) => {
@@ -36,6 +37,7 @@ function App() {
 			}
 			if (user) {
 				setIsLoggedIn({ loaded: true, loggedIn: true });
+				setRestaurantEmail(user.email);
 			}
 		});
 
@@ -44,8 +46,6 @@ function App() {
 
 	async function logoutHandler() {
 		if (!isLoggedIn.loggedIn) return;
-
-		const auth = getAuth();
 
 		dispatch(realTimeReservations([]));
 		dispatch(clearRestaurantData());
@@ -81,7 +81,7 @@ function App() {
 		return (
 			<div className="app-container">
 				<div className="inner-container">
-					<Navbar name={name} onLogout={logoutHandler} />
+					<Navbar name={restaurantEmail} onLogout={logoutHandler} />
 					<Routes>
 						<Route
 							path="/*"

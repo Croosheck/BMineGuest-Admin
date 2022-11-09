@@ -7,6 +7,8 @@ function ReservationListItem({
 	extrasTotalPrice,
 	reservationDate,
 	table,
+	extras,
+	extrasImgs,
 	onDelete,
 	confirmed,
 	cancelled,
@@ -14,6 +16,8 @@ function ReservationListItem({
 	onConfirm,
 	onCancel,
 	onCallRequest,
+	onClick,
+	reservationPicked,
 }) {
 	const people = table.tSeats === 1 ? "guest" : "guests";
 
@@ -36,59 +40,101 @@ function ReservationListItem({
 
 	return (
 		<div className="reservation-container" onClick={openReservationHandler}>
-			<div className="reservation-inner-container">
-				<div className="reservation-details">
-					<div className="reservation-detail --name">
-						👤&nbsp;<div className="name">{clientsName}</div>
+			<div
+				className={`reservation-inner-container ${
+					reservationPicked && "--reservation-details"
+				}`}
+			>
+				<div className="reservation--top-inner-container">
+					<div className="reservation-details">
+						<div className="reservation-detail --name">
+							👤&nbsp;<div className="name">{clientsName}</div>
+						</div>
+						<div className="reservation-detail --email">
+							📧&nbsp;
+							<a href={`mailto:${clientsEmail}`} className="email">
+								{clientsEmail}
+							</a>
+						</div>
+
+						<div className="reservation-detail --date">
+							📆&nbsp;<div className="date">{reservationDate}</div>
+						</div>
+						<div className="reservation-detail --table">
+							👥&nbsp;<div className="table">{table.tSeats}</div>&nbsp;{people}
+						</div>
+						<div className="reservation-detail --xPrice">
+							💰&nbsp;
+							<div className="xPrice">{extrasTotalPrice}$</div>
+						</div>
 					</div>
-					<div className="reservation-detail --email">
-						📧&nbsp;
-						<a href={`mailto:${clientsEmail}`} className="email">
-							{clientsEmail}
-						</a>
+					{/* ///////////////SECTION/////////////// */}
+					<div className="reservation-status-container">
+						{reservationStatus}
 					</div>
-					<div className="reservation-detail --date">
-						📆&nbsp;<div className="date">{reservationDate}</div>
-					</div>
-					<div className="reservation-detail --table">
-						👥&nbsp;<div className="table">{table.tSeats}</div>&nbsp;{people}
-					</div>
-					<div className="reservation-detail --xPrice">
-						💰&nbsp;
-						<div className="xPrice">{extrasTotalPrice}$</div>
-					</div>
-				</div>
-				<div className="reservation-status-container">{reservationStatus}</div>
-				<div className="reservation-options">
-					<div className="dropdown">
-						<button className="dropbtn">Options</button>
-						<div className="dropdown-content">
-							<div className="dropdown-content-btns-inner-container">
+					{/* ///////////////SECTION/////////////// */}
+					<div className="reservation-options">
+						<div className="dropdown">
+							<button className="dropbtn">Options</button>
+							<div className="dropdown-content">
+								<div className="dropdown-content-btns-inner-container">
+									<button
+										className="dropdown-content-btn dropdown-btn-left"
+										onClick={onConfirm}
+									>
+										Confirm
+									</button>
+									<button
+										className="dropdown-content-btn dropdown-btn-right"
+										onClick={onCancel}
+									>
+										Cancel
+									</button>
+								</div>
 								<button
-									className="dropdown-content-btn dropdown-btn-left"
-									onClick={onConfirm}
+									className="reservation-callus-btn"
+									onClick={onCallRequest}
 								>
-									Confirm
+									Call Request
 								</button>
-								<button
-									className="dropdown-content-btn dropdown-btn-right"
-									onClick={onCancel}
-								>
-									Cancel
+								<button className="reservation-delete-btn" onClick={onDelete}>
+									Delete
 								</button>
 							</div>
-							<button
-								className="reservation-callus-btn"
-								onClick={onCallRequest}
-							>
-								Call Request
-							</button>
-							<button className="reservation-delete-btn" onClick={onDelete}>
-								Delete
-							</button>
 						</div>
 					</div>
 				</div>
+				{reservationPicked && (
+					<div className="reservation--details-container">
+						<div className="details--inner-container">
+							<div className="details--list-container">
+								{extras.map((xItem, i) => {
+									return (
+										<div
+											key={i}
+											className="details--inner-container--extraItem"
+										>
+											<div className="details--extra-name">{xItem.xName}</div>
+											<img
+												src={extrasImgs[xItem.xFileName.slice(0, -4)]}
+												alt="Extra Item"
+											/>
+											<div className="details--extra-price">
+												{xItem.xPrice}$
+											</div>
+										</div>
+									);
+								})}
+							</div>
+						</div>
+						<div className=" details--inner-container">
+							<div className="details--list-container"></div>
+						</div>
+					</div>
+				)}
+				<button className="reservation-item--details-button" onClick={onClick}>
+					Details
+				</button>
 			</div>
 		</div>
 	);
