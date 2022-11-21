@@ -3,6 +3,8 @@
 	overflow: auto;
 	overflow-x: hidden;
 	transition: ease-in-out 0.2s;
+	background-color: white;
+	height: 100%;
 }
 
 .manageExtras-inner-container {
@@ -18,6 +20,8 @@
 	transition: ease-in-out 0.2s;
 	overflow: hidden;
 	background-color: rgb(255, 255, 255);
+	box-shadow: 2px 2px 10px 1px rgba(0, 0, 0, 0.2);
+	border: 2px solid rgba(134, 134, 134, 0.292);
 }
 
 @media only screen and (min-width: 850px) {
@@ -41,4 +45,11 @@
 	flex-wrap: wrap;
 	overflow: auto;
 	overflow-x: none;
+}
+
+.manageExtras-manage > legend {
+	color: rgb(0, 0, 0);
+	font-weight: bold;
+	font-size: 16px;
+	letter-spacing: 0.5px;
 }

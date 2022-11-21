@@ -12,7 +12,7 @@ import {
 	query,
 	updateDoc,
 } from "firebase/firestore";
-import { auth, db, storage } from "../../firebase";
+import { auth, db, storage } from "../../../firebase";
 import { getDownloadURL, ref } from "firebase/storage";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -20,7 +20,7 @@ import {
 	resetAvailableExtrasGlobal,
 	resetPickedExtras,
 	setAvailableExtrasGlobal,
-} from "../../redux/slices/restaurant";
+} from "../../../redux/slices/restaurant";
 import RestaurantExtraTile from "./RestaurantExtraTile";
 
 function ManageExtras(props) {
@@ -111,7 +111,8 @@ function ManageExtras(props) {
 	return (
 		<div className="manageExtras-container">
 			<div className="manageExtras-inner-container">
-				<div className="manageExtras-manage">
+				<fieldset className="manageExtras-manage">
+					<legend>Available Extras</legend>
 					<div className="manageExtras-available-extras-list">
 						{availableExtrasGlobal.map((item, index) => {
 							return (
@@ -131,8 +132,9 @@ function ManageExtras(props) {
 							);
 						})}
 					</div>
-				</div>
-				<div className="manageExtras-manage">
+				</fieldset>
+				<fieldset className="manageExtras-manage">
+					<legend>Picked Extras</legend>
 					<div className="manageExtras-available-extras-list">
 						{restaurantExtras.map((item, index) => {
 							return (
@@ -146,7 +148,7 @@ function ManageExtras(props) {
 							);
 						})}
 					</div>
-				</div>
+				</fieldset>
 			</div>
 		</div>
 	);

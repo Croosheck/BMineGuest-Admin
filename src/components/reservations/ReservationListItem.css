@@ -48,6 +48,7 @@
 	position: relative;
 	display: flex;
 	flex-direction: row;
+	padding-bottom: 10px;
 }
 
 @keyframes detailsAnimation {
@@ -65,10 +66,11 @@
 .reservation--details-container {
 	width: 100%;
 	margin: 10px 0;
+	padding: 20px 0;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	border-radius: 12px;
+	border-top: 0.5px solid rgba(0, 0, 0, 0.123);
 }
 .details--inner-container {
 	background: linear-gradient(
@@ -86,13 +88,25 @@
 	transition: ease-in-out 0.2s;
 	box-shadow: 2px 1px 5px 0 rgba(0, 0, 0, 0.222);
 }
-.details--list-container {
+.details--extras-list-container {
 	display: flex;
+	justify-content: center;
 	flex-wrap: wrap;
 	width: 100%;
 	height: 100%;
 	overflow: auto;
 	overflow-x: hidden;
+}
+.details--table-list-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	overflow-x: hidden;
+	color: black;
 }
 
 .details--inner-container--extraItem {
@@ -102,13 +116,24 @@
 	justify-content: center;
 	align-items: center;
 	flex-direction: column;
-	width: 30%;
-	height: 70%;
-	margin: 5px;
+	width: 120px;
+	height: 110px;
+	margin: 10px;
 	padding: 10px;
 	border-radius: 20px;
 	box-shadow: 2px 2px 5px 1px rgba(0, 0, 0, 0.375);
 	overflow: hidden;
+}
+.details-label {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	margin-top: 15px;
+	color: black;
+	border-bottom: 0.5px solid rgba(0, 0, 0, 0.152);
+	font-size: 90%;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 .details--extra-name {
 	text-align: center;
@@ -130,7 +155,7 @@
 	text-align: center;
 	color: black;
 	font-size: 80%;
-	background-color: #5392ffb5;
+	background-color: #5392ff7b;
 	width: 100%;
 	font-weight: bold;
 	height: 17%;
@@ -138,20 +163,33 @@
 
 .reservation-item--details-button {
 	position: absolute;
-	width: 14%;
+	margin-left: auto;
+	margin-right: auto;
+	width: 12%;
 	height: 23px;
-	left: 43%;
+	left: 0;
+	right: 0;
 	bottom: 0%;
+	text-align: center;
 	border: none;
 	border-radius: 10px 10px 0 0;
 	cursor: pointer;
 	background-color: #7da8ff;
 	color: white;
+	transition: ease-in-out 0.15s;
+	font-size: 80%;
+}
+.reservation-item--details-button:hover {
+	scale: 1.05;
+	background-color: #6498ff;
 }
 
-@media only screen and (min-width: 900px) {
+@media only screen and (min-width: 1000px) {
 	.reservation--top-inner-container {
-		width: 100vw;
+		width: 95vw;
+	}
+	.reservation-item--details-button {
+		font-size: 90%;
 	}
 }
 
@@ -243,7 +281,7 @@
 .dropdown {
 	position: relative;
 	display: inline-block;
-	transition: ease-in-out 0.2s;
+	height: 0;
 }
 
 .dropbtn {
@@ -254,6 +292,7 @@
 	border: none;
 	cursor: pointer;
 	border-radius: 10px;
+	transition: ease-in-out 0.2s;
 }
 .dropdown-content {
 	display: none;
@@ -264,13 +303,13 @@
 	border-radius: 5px;
 	padding: 10px 0px;
 
-	/* background-color: #98beff; */
+	/* background-color: #000000; */
 }
 
 @keyframes dropdownAnimationEnter {
 	from {
 		opacity: 0;
-		transform: translateY(-30%);
+		transform: translateY(-20%);
 	}
 	to {
 		opacity: 1;
@@ -393,15 +432,15 @@
 		width: 25%;
 	}
 }
-@media only screen and (max-width: 550px) {
+@media only screen and (max-width: 510px) {
 	.dropdown {
-		top: 4%;
-		right: 4%;
+		top: 0%;
+		right: -2%;
 		scale: 0.8;
 	}
 	.reservation-status-container {
-		top: 2%;
-		right: 28%;
+		top: -5%;
+		right: 24%;
 		scale: 0.6;
 		width: 35%;
 		font-size: 20px;

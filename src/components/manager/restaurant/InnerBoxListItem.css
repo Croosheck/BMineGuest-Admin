@@ -1,0 +1,44 @@
+ul {
+	overflow-y: auto;
+	overflow-x: visible;
+	width: 100%;
+	padding: 0 10px;
+}
+li {
+	background-color: rgb(255, 0, 0);
+
+	width: 100%;
+	list-style: none;
+	margin: 15px 0;
+	border-radius: 12px;
+}
+li > div {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 10px 10px;
+	background-color: rgb(105, 159, 234);
+	box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.232);
+	border-radius: 10px;
+	border: 2px solid white;
+}
+
+/* Name container */
+li > div > div:nth-child(1n) {
+	color: rgb(255, 255, 255);
+	font-weight: 600;
+	text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.727);
+}
+
+/* Status container */
+li > div > div:nth-child(2n) {
+}
+
+/* Switch container */
+li > div > div:nth-child(3n) {
+	width: 50px;
+	height: 25px;
+	display: flex;
+	border-radius: 12.5px;
+	overflow: hidden;
+}

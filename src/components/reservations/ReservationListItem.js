@@ -31,15 +31,13 @@ function ReservationListItem({
 		if (cancelled)
 			return <div className="reservartion-status --cancelled">Cancelled</div>;
 		if (!confirmed && !cancelled && callRequest)
-			return (
-				<div className="reservartion-status --callRequest">Call Request</div>
-			);
+			return <div className="reservartion-status --callRequest">Call</div>;
 	}
 
 	const reservationStatus = getReservationStatusHandler();
 
 	return (
-		<div className="reservation-container" onClick={openReservationHandler}>
+		<div className="reservation-container">
 			<div
 				className={`reservation-inner-container ${
 					reservationPicked && "--reservation-details"
@@ -107,7 +105,7 @@ function ReservationListItem({
 				{reservationPicked && (
 					<div className="reservation--details-container">
 						<div className="details--inner-container">
-							<div className="details--list-container">
+							<div className="details--extras-list-container">
 								{extras.map((xItem, i) => {
 									return (
 										<div
@@ -126,9 +124,14 @@ function ReservationListItem({
 									);
 								})}
 							</div>
+							<div className="details-label">EXTRAS</div>
 						</div>
 						<div className=" details--inner-container">
-							<div className="details--list-container"></div>
+							<div className="details--table-list-container">
+								<div>{table.tSeats}</div>
+								<div>{table.tShape}</div>
+							</div>
+							<div className="details-label">TABLE</div>
 						</div>
 					</div>
 				)}

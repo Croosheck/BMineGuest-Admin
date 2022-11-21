@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Login from "./components/auth/Login";
 import ReservationsList from "./components/reservations/ReservationsList";
 import Navbar from "./components/UI/Navbar";
-import ManageExtras from "./components/manager/ManageExtras";
+import ManageExtras from "./components/manager/extras/ManageExtras";
 
 import {
 	clearRestaurantData,
