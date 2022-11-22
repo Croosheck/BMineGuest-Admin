@@ -24,6 +24,14 @@
 	border: 2px solid rgba(134, 134, 134, 0.292);
 }
 
+.manageExtras-manage > legend {
+	color: rgb(142, 142, 142);
+	margin-left: 30px;
+	background-color: transparent;
+	font-size: 15px;
+	padding: 0 3px;
+}
+
 @media only screen and (min-width: 850px) {
 	.manageExtras-manage {
 		width: calc(100vw * 0.48);

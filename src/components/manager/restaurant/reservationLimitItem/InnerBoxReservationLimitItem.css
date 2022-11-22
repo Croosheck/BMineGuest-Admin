@@ -1,0 +1,54 @@
+.manage-restaurant--limit-advance--item {
+	width: 45%;
+	height: 50%;
+	margin: 10px 10px;
+	border-radius: 25px;
+	overflow: hidden;
+	box-shadow: 3px 3px 8px 0 rgba(0, 0, 0, 0.355);
+}
+
+.reservation-limit--container {
+	color: white;
+}
+
+.limit-item--content-container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: 100%;
+}
+
+.limit-item--number-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 70%;
+	/* background-color: rgb(71, 184, 184); */
+	color: black;
+	font-weight: 600;
+	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.473);
+	font-size: 130%;
+}
+
+.limit-item--buttons-container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 30%;
+	background-color: rgba(71, 101, 253, 0.132);
+	backdrop-filter: blur(50px);
+	border-radius: 0 0 22px 22px;
+}
+
+fieldset.manage-restaurant--limit-advance--item {
+	padding: 2px;
+}
+.manage-restaurant--limit-advance--item > legend {
+	color: rgb(0, 0, 0);
+	text-align: center;
+	background-color: transparent;
+	font-size: 85%;
+	padding: 0 3px;
+}

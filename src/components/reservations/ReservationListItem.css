@@ -293,6 +293,7 @@
 	cursor: pointer;
 	border-radius: 10px;
 	transition: ease-in-out 0.2s;
+	text-shadow: 1px 1px 5px rgba(255, 255, 255, 0.727);
 }
 .dropdown-content {
 	display: none;
@@ -302,8 +303,6 @@
 	z-index: 1;
 	border-radius: 5px;
 	padding: 10px 0px;
-
-	/* background-color: #000000; */
 }
 
 @keyframes dropdownAnimationEnter {

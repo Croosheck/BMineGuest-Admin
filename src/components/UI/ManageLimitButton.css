@@ -1,0 +1,32 @@
+.manage-limit-button--container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 30px;
+	margin: 0 5px;
+	border-radius: 20px;
+	box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.408);
+	background-color: transparent;
+
+	transition: ease-in-out 0.1s;
+}
+
+.manage-limit-button--container > button {
+	height: 100%;
+	padding: 0 10px;
+	border-radius: 20px;
+	border: none;
+	cursor: pointer;
+	text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.199);
+	color: rgba(0, 0, 0, 0.714);
+	font-weight: bold;
+	background: linear-gradient(
+		320deg,
+		rgba(0, 0, 0, 0.14) 15%,
+		rgba(255, 255, 255, 1) 60%
+	);
+}
+
+.manage-limit-button--container:hover {
+	scale: 1.05;
+}

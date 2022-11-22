@@ -25,7 +25,7 @@
 	width: 46%;
 	height: 92%;
 	border-radius: 100px;
-	transition: 0.4s;
+	transition: 0.2s;
 	background: #fff;
 	box-shadow: 1px 2px 2px 0 rgba(10, 10, 10, 0.263);
 }
@@ -37,4 +37,9 @@
 
 .react-switch-label:active .react-switch-button {
 	width: 60%;
+}
+
+.react-switch-label:hover .react-switch-button {
+	background: rgb(235, 235, 235);
+	scale: 1.05;
 }
