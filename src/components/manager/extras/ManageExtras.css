@@ -24,25 +24,28 @@
 	border: 2px solid rgba(134, 134, 134, 0.292);
 }
 
-.manageExtras-manage > legend {
-	color: rgb(142, 142, 142);
-	margin-left: 30px;
-	background-color: transparent;
-	font-size: 15px;
-	padding: 0 3px;
+@media (width > 850px) {
+	.manageExtras-manage {
+		width: 45vw;
+		height: 30vw;
+	}
+}
+@media (width < 850px) {
+	.manageExtras-manage {
+		width: 30vw;
+		height: 70vw;
+		min-width: 90vw;
+	}
 }
 
-@media only screen and (min-width: 850px) {
-	.manageExtras-manage {
-		width: calc(100vw * 0.48);
-		height: calc(100vw * 0.3);
-	}
-}
-@media only screen and (max-width: 850px) {
-	.manageExtras-manage {
-		width: calc(100vw * 0.85);
-		height: calc(100vw * 0.8);
-	}
+.manageExtras-manage > legend {
+	margin-left: 30px;
+	background-color: transparent;
+	padding: 0 3px;
+	color: rgb(0, 0, 0);
+	font-weight: bold;
+	font-size: 16px;
+	letter-spacing: 0.5px;
 }
 
 .manageExtras-available-extras-list {
@@ -53,11 +56,4 @@
 	flex-wrap: wrap;
 	overflow: auto;
 	overflow-x: none;
-}
-
-.manageExtras-manage > legend {
-	color: rgb(0, 0, 0);
-	font-weight: bold;
-	font-size: 16px;
-	letter-spacing: 0.5px;
 }

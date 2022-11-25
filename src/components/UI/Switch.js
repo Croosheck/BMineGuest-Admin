@@ -13,7 +13,6 @@ function Switch({ isOn, handleToggle, onColor }) {
 				className="react-switch-label"
 				style={{ background: isOn && onColor }}
 				onClick={handleToggle}
-				checked={isOn}
 			>
 				<span className={`react-switch-button`} />
 			</label>

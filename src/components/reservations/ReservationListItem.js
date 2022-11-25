@@ -18,6 +18,7 @@ function ReservationListItem({
 	onCallRequest,
 	onClick,
 	reservationPicked,
+	howMany,
 }) {
 	const people = table.tSeats === 1 ? "guest" : "guests";
 
@@ -59,7 +60,7 @@ function ReservationListItem({
 							📆&nbsp;<div className="date">{reservationDate}</div>
 						</div>
 						<div className="reservation-detail --table">
-							👥&nbsp;<div className="table">{table.tSeats}</div>&nbsp;{people}
+							👥&nbsp;<div className="table">{howMany}</div>&nbsp;{people}
 						</div>
 						<div className="reservation-detail --xPrice">
 							💰&nbsp;

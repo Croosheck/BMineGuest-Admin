@@ -1,13 +1,7 @@
 import "./InnerBoxToggleItem.css";
-import Switch from "../../../UI/Switch";
+import Switch from "../../../../UI/Switch";
 
 function InnerBoxToggleItem({ name, handleToggle, isOn, toggle, status }) {
-	// const statusToggle = isOn ? (
-	// 	<div>{status.active}</div>
-	// ) : (
-	// 	<div>{status.inactive}</div>
-	// );
-
 	return (
 		<li>
 			<div>

@@ -18,12 +18,19 @@
 
 	cursor: default;
 }
-@media only screen and (max-width: 1020px) {
+@media (max-width: 1020px) {
 	.restaurant-extras-item {
 		width: 30%;
 		margin: 2% 1.6666%;
 	}
 }
+@media (width < 580px) {
+	.restaurant-extras-item {
+		width: 40%;
+		margin: 2% 5%;
+	}
+}
+
 .restaurant-extras-item:hover {
 	opacity: 1;
 	scale: 1;

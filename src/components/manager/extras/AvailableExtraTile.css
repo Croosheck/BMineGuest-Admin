@@ -18,10 +18,16 @@
 	animation: availableExtraItem 1s;
 }
 
-@media only screen and (max-width: 1020px) {
+@media (max-width: 1020px) {
 	.available-extras-item {
 		width: 30%;
 		margin: 2% 1.6666%;
+	}
+}
+@media (width < 580px) {
+	.available-extras-item {
+		width: 40%;
+		margin: 2% 5%;
 	}
 }
 
@@ -43,7 +49,7 @@
 	align-items: center;
 	height: 80%;
 }
-img {
+.extras-item-picture > img {
 	height: 90%;
 	animation: availableExtraItem 1s;
 }

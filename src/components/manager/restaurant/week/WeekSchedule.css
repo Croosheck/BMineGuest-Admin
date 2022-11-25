@@ -1,0 +1,59 @@
+.week-schedule--container {
+	--weekDay-gap: 1.5%;
+	/* background-color: aquamarine; */
+
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--weekDay-gap);
+	justify-content: center;
+	padding: 10px 0 40px 0;
+	position: relative;
+}
+
+.week-schedule--container:hover > div {
+	scale: 0.95;
+	opacity: 0.5;
+}
+.week-schedule--container > div:hover {
+	scale: 1.1;
+	opacity: 1;
+}
+
+.week-schedule--submit-button-container {
+	background-color: rgba(144, 144, 214, 0.841);
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	margin-right: auto;
+	margin-left: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 0 0 20px 20px;
+	height: 40px;
+}
+
+.week-schedule--submit-button-container > button {
+	z-index: inherit;
+	border-radius: 20px;
+	border: none;
+	margin: 5px 0;
+	padding: 5px 10px;
+	cursor: pointer;
+	scale: 1.05;
+	transition: ease-in-out 0.2s;
+	white-space: nowrap;
+	font-weight: bold;
+	font-family: "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+	box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.414);
+
+	background: linear-gradient(
+		320deg,
+		rgba(0, 0, 0, 0.227) 15%,
+		rgba(255, 255, 255, 0.679) 60%
+	);
+}
+.week-schedule--submit-button-container > button:hover {
+	scale: 1;
+}

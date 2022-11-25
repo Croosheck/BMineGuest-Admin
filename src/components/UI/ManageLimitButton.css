@@ -1,32 +1,63 @@
 .manage-limit-button--container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 30px;
-	margin: 0 5px;
-	border-radius: 20px;
-	box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.408);
-	background-color: transparent;
+	height: 100%;
+	width: 50%;
+	font-size: 180%;
+	transition: ease-in-out 0.08s;
+	transform: scale(1, 0.9);
+}
 
-	transition: ease-in-out 0.1s;
+/* LEFT */
+.manage-limit-button--container:nth-child(1) {
+	border-radius: 0 0 0 20px;
+	box-shadow: -1px 1px 2px 0 rgba(0, 0, 0, 0.408);
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	margin-left: 3px;
+	margin-right: 0.5px;
+}
+.manage-limit-button--container:nth-child(1) > button {
+	color: rgb(231, 214, 215);
+}
+
+/* RIGHT */
+.manage-limit-button--container:nth-child(2) {
+	border-radius: 0 0 20px 0;
+	box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.408);
+	border: 1px solid rgba(0, 0, 0, 0.3);
+	margin-right: 3px;
+	margin-left: 0.5px;
+}
+.manage-limit-button--container:nth-child(2) > button {
+	color: rgb(194, 255, 190);
+	font-size: 150%;
+}
+
+@media (width < 800px) {
+	.manage-limit-button--container {
+		font-size: 180%;
+	}
 }
 
 .manage-limit-button--container > button {
-	height: 100%;
-	padding: 0 10px;
-	border-radius: 20px;
+	height: inherit;
+	min-height: 30px;
+	width: 100%;
+	border-radius: inherit;
 	border: none;
-	cursor: pointer;
-	text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.199);
-	color: rgba(0, 0, 0, 0.714);
+	text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.359);
 	font-weight: bold;
+	font-size: 100%;
+	cursor: pointer;
 	background: linear-gradient(
 		320deg,
 		rgba(0, 0, 0, 0.14) 15%,
-		rgba(255, 255, 255, 1) 60%
+		rgba(255, 255, 255, 0.679) 60%
 	);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .manage-limit-button--container:hover {
-	scale: 1.05;
+	scale: 0.95;
+	background-color: aliceblue;
 }

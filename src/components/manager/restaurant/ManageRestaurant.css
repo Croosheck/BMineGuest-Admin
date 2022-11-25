@@ -3,17 +3,22 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-
 	background-color: white;
 	overflow-y: hidden;
 }
 
+/* INNER CONTAINER */
 .manage-restaurant-container > div {
 	width: 100%;
 	height: 100%;
-
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
 	overflow: auto;
+}
+
+/* WEEK SCHEDULE */
+.manage-restaurant-container > div > *:first-child {
+	flex: 0 1 calc((var(--innerbox-maxwidth) * 2) + 40px);
+	max-width: none;
 }

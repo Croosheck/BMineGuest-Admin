@@ -40,6 +40,5 @@
 }
 
 .react-switch-label:hover .react-switch-button {
-	background: rgb(235, 235, 235);
-	scale: 1.05;
+	background: rgb(141, 245, 255);
 }

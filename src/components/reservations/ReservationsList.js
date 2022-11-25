@@ -110,6 +110,7 @@ function ReservationsList() {
 					key={index}
 					clientsName={reservation.clientsName}
 					clientsEmail={reservation.clientsEmail}
+					howMany={reservation.howMany}
 					extrasTotalPrice={reservation.extrasTotalPrice}
 					reservationDate={reservation.reservationDate}
 					table={reservation.table}

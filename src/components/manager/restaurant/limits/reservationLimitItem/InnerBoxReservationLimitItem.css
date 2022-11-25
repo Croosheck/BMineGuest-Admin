@@ -1,7 +1,7 @@
 .manage-restaurant--limit-advance--item {
 	width: 45%;
 	height: 50%;
-	margin: 10px 10px;
+	margin: 1% 2%;
 	border-radius: 25px;
 	overflow: hidden;
 	box-shadow: 3px 3px 8px 0 rgba(0, 0, 0, 0.355);
@@ -23,12 +23,17 @@
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	height: 70%;
+	height: 60%;
 	/* background-color: rgb(71, 184, 184); */
 	color: black;
 	font-weight: 600;
-	text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.473);
-	font-size: 130%;
+	text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.473);
+	font-size: 150%;
+}
+@media (width <= 700px) {
+	.limit-item--number-container {
+		font-size: 150%;
+	}
 }
 
 .limit-item--buttons-container {
@@ -36,7 +41,7 @@
 	justify-content: center;
 	align-items: center;
 	width: 100%;
-	height: 30%;
+	height: 40%;
 	background-color: rgba(71, 101, 253, 0.132);
 	backdrop-filter: blur(50px);
 	border-radius: 0 0 22px 22px;
@@ -44,6 +49,7 @@
 
 fieldset.manage-restaurant--limit-advance--item {
 	padding: 2px;
+	border: 2px solid rgba(0, 0, 0, 0.127);
 }
 .manage-restaurant--limit-advance--item > legend {
 	color: rgb(0, 0, 0);
@@ -51,4 +57,5 @@ fieldset.manage-restaurant--limit-advance--item {
 	background-color: transparent;
 	font-size: 85%;
 	padding: 0 3px;
+	text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.489);
 }

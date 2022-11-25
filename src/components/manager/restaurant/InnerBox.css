@@ -1,28 +1,40 @@
 .manage-restaurant--inner-box {
+	--innerbox-maxwidth: 550px;
+	--innerbox-minwidth: 390px;
+	--innerbox-minheight: 250px;
+
 	position: relative;
 	display: flex;
 	justify-content: center;
 	height: 50%;
-	min-height: 200px;
 	width: 70%;
-	min-width: 390px;
-	max-width: 550px;
+	min-height: var(--innerbox-minheight);
+	min-width: var(--innerbox-minwidth);
+	max-width: var(--innerbox-maxwidth);
 	margin: 20px 20px 20px 20px;
 	border-radius: 30px;
 	box-shadow: 2px 2px 10px -1px rgba(0, 0, 0, 0.2);
 }
 .inner-box--inner-container {
 	display: flex;
+	justify-content: center;
 	position: absolute;
 	left: 0;
 	width: 100%;
 	height: 100%;
-	padding: 20px 10px;
+	padding: 10px 10px;
+	overflow-y: auto;
+	overflow-x: hidden;
 }
+/* .inner-box--inner-container ul {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+} */
+
 .inner-box--inner-container--wrap {
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
 }
 
 fieldset.manage-restaurant--inner-box {

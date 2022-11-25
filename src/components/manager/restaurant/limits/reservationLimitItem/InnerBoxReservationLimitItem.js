@@ -1,6 +1,6 @@
 import "./InnerBoxReservationLimitItem.css";
 import React from "react";
-import ManageLimitButton from "../../../UI/ManageLimitButton";
+import ManageLimitButton from "../../../../UI/ManageLimitButton";
 
 function InnerBoxReservationLimitItem({ value, onSubstract, onAdd }) {
 	let reservationSize = value;
@@ -15,8 +15,8 @@ function InnerBoxReservationLimitItem({ value, onSubstract, onAdd }) {
 			<div className="limit-item--content-container">
 				<div className="limit-item--number-container">{reservationSize}</div>
 				<div className="limit-item--buttons-container">
-					<ManageLimitButton onClick={onSubstract}>Decrease</ManageLimitButton>
-					<ManageLimitButton onClick={onAdd}>Increase</ManageLimitButton>
+					<ManageLimitButton onClick={onSubstract}>—</ManageLimitButton>
+					<ManageLimitButton onClick={onAdd}>+</ManageLimitButton>
 				</div>
 			</div>
 		</fieldset>

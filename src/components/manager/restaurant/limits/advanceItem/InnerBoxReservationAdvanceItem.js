@@ -1,4 +1,4 @@
-import ManageLimitButton from "../../../UI/ManageLimitButton";
+import ManageLimitButton from "../../../../UI/ManageLimitButton";
 import "./InnerBoxReservationAdvanceItem.css";
 
 function InnerBoxReservationAdvanceItem({ value, onSubstract, onAdd }) {
@@ -7,18 +7,18 @@ function InnerBoxReservationAdvanceItem({ value, onSubstract, onAdd }) {
 		reservationAdvance = value === 1 ? `${value} day` : `${value} days`;
 	}
 	const textStyle =
-		value === 0 ? { fontSize: "130%", color: "#2B6198" } : { fontSize: "130%" };
+		value === 0 ? { fontSize: "150%", color: "#2B6198" } : { fontSize: "150%" };
 
 	return (
 		<fieldset className="manage-restaurant--limit-advance--item reservation-advance--container">
 			<legend>Reservation Advance</legend>
 			<div className="advance-item--content-container">
-				<div className="advance-item--number-container" style={textStyle}>
+				<div style={textStyle} className="advance-item--number-container">
 					{reservationAdvance}
 				</div>
 				<div className="advance-item--buttons-container">
-					<ManageLimitButton onClick={onSubstract}>Decrease</ManageLimitButton>
-					<ManageLimitButton onClick={onAdd}>Increase</ManageLimitButton>
+					<ManageLimitButton onClick={onSubstract}>—</ManageLimitButton>
+					<ManageLimitButton onClick={onAdd}>+</ManageLimitButton>
 				</div>
 			</div>
 		</fieldset>

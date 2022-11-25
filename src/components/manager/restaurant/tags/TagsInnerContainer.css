@@ -1,0 +1,62 @@
+.tags--outer-container {
+	--gap: 5px;
+
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+	height: 100%;
+	border-radius: 20px;
+	gap: var(--gap);
+	overflow: hidden;
+}
+
+/* BOTH TAGS CONTAINERS */
+.tags--outer-container > * {
+	height: 100%;
+	width: calc(50% - 5px);
+	display: flex;
+	flex-direction: column;
+	border-radius: 20px;
+	border: none;
+	overflow: hidden;
+}
+@media (width < 780px) {
+	.tags--outer-container > * {
+		height: 50%;
+		width: 100%;
+	}
+}
+
+/* AVAILABLE TAGS CONTAINER */
+.tags--outer-container > fieldset:nth-child(1) {
+	background-color: rgb(181, 184, 185);
+}
+/* PICKED TAGS CONTAINER */
+.tags--outer-container > fieldset:nth-child(2) {
+	background-color: rgb(202, 213, 193);
+}
+
+.tags--outer-container legend {
+	color: black;
+	margin-left: 20px;
+	padding: 0 15px;
+	border-radius: 20px;
+	background-color: rgb(244, 244, 244);
+	font-weight: bold;
+	font-size: 18px;
+
+	position: absolute;
+	transform: translateY(-10px);
+}
+
+/* TAGS LIST */
+.tags--outer-container > fieldset > div {
+	display: flex;
+	flex-wrap: wrap;
+
+	gap: var(--gap);
+	padding: 20px 5px;
+
+	overflow-y: auto;
+	overflow-x: hidden;
+}
