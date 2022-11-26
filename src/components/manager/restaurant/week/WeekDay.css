@@ -1,15 +1,21 @@
 .week-day--container {
 	--weekday-width: calc((100% - (6 * var(--weekDay-gap))) / 7);
+	--weekday-padding: 5px;
 
 	flex: 0 1 var(--weekday-width);
 	min-width: 130px;
 	height: 70%;
 	min-height: 190px;
-	padding: 5px;
+	padding: var(--weekday-padding);
 	border-radius: 10px;
 	margin: 5px 0;
-	/* background-color: hsl(203, 64%, 98%); */
-	background-color: hsl(203, 64%, 68%);
+
+	background: linear-gradient(
+		160deg,
+		rgba(0, 0, 0, 0.14) 15%,
+		rgba(255, 255, 255, 0.679) 60%
+	);
+	background-color: hsl(268, 86%, 68%);
 	box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.297);
 	color: black;
 	transition: ease-in-out 0.2s;
@@ -17,16 +23,25 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
+	scroll-snap-align: center;
 }
 .week-day--container:hover {
 	scale: 1.05;
 }
+.week-day--container h4 {
+	color: white;
+	margin: 0.2rem;
+}
 
 .week-day--open-status-container {
-	width: 100%;
+	--weekday-status-container-height: 1.5rem;
+
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
+
+	max-height: var(--weekday-status-container-height);
 }
 .week-day--open-status-container:first-child {
 	margin-right: 10px;
@@ -37,36 +52,132 @@
 	justify-content: center;
 	align-items: center;
 	position: relative;
+	margin: 0 0.5rem;
 }
-.week-day--open-status-container > div > img {
-	width: 25px;
+div[data-reservations-status] > div {
+	--status-light-size: 1.5rem;
+	width: var(--status-light-size);
+	height: var(--status-light-size);
+	border-radius: calc(var(--status-light-size) * 0.5);
+	border: 2px solid black;
+	background: linear-gradient(
+		320deg,
+		rgba(0, 0, 0, 0.271) 30%,
+		rgba(255, 255, 255, 0.593) 60%,
+		rgba(255, 255, 255, 0.867) 80%
+	);
+	transition: ease-in-out 0.3s;
 }
-div[data-reservations-status]::after {
+div[data-reservations-status*="open"] > div {
+	background-color: greenyellow;
+}
+div[data-reservations-status*="closed"] > div {
+	background-color: red;
+}
+div[data-reservations-status]::before {
 	content: attr(data-reservations-status);
-	transition: ease-in-out 0.2s;
+	transition: ease-in-out 0.15s;
 	color: black;
 	position: absolute;
-	top: 0%;
-	left: 0;
-	font-size: 14px;
+	font-size: 0.8rem;
+	left: -100%;
 	font-weight: bold;
-	box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.316);
-	margin-top: 5px;
+	box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, 0.475);
+	text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.205);
+	margin: 5px;
 	padding: 5px;
 	border-radius: 10px;
-	background-color: rgb(215, 248, 255);
+	background-color: hsl(141, 78%, 82%);
 	transform: scale(0);
 	text-align: center;
+	z-index: 2;
 }
-div[data-reservations-status]:hover::after {
+div[data-reservations-status]:hover::before {
 	transform: scale(1);
-	top: 100%;
+	left: 100%;
 }
 
 .week-day--switch-box {
-	width: 50px;
-	height: 25px;
+	width: 3.5rem;
+	height: var(--weekday-status-container-height);
 	display: flex;
 	border-radius: 12.5px;
 	overflow: hidden;
+}
+
+/* HOUR SEETINGS */
+.week-day--hours--main-container {
+	/* background-color: blanchedalmond; */
+
+	display: flex;
+	flex-direction: column;
+	width: calc(100% + (var(--weekday-padding)) * 2);
+}
+
+.week-day--hour-container {
+	/* background-color: rgb(151, 150, 148); */
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: 0.5rem 0;
+}
+
+.week-day--hour-number {
+	font-size: 0.9rem;
+	font-weight: 600;
+	text-shadow: 1px 1px 2px white;
+	transform: translateX(-0.5rem);
+	margin-bottom: 0.2rem;
+}
+.week-day--hour-number::after {
+	content: " (24h)";
+	font-size: 0.6rem;
+	position: absolute;
+	margin-left: 0.5ch;
+}
+
+.week-day--hour-buttons-container {
+	--hours-gap: 0.3rem;
+
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--hours-gap);
+
+	min-width: 6rem;
+}
+.week-day--hour-buttons-container > button {
+	flex: 1 1 calc(50% - var(--hours-gap));
+	cursor: pointer;
+	transition: ease-in-out 0.15s;
+	background: linear-gradient(
+		320deg,
+		rgba(0, 0, 0, 0.14) 15%,
+		rgba(255, 255, 255, 0.679) 60%
+	);
+	background-color: rgb(22, 135, 228);
+	box-shadow: 1px 1px 2px 0 rgba(0, 0, 0, 0.607);
+	font-size: 1.1rem;
+	font-weight: bold;
+	color: white;
+	border: 2px solid rgba(0, 0, 0, 0.092);
+}
+.week-day--hour-buttons-container > button:hover {
+	scale: 1.1;
+	background-color: hsl(207, 82%, 58%);
+}
+.week-day--hour-buttons-container > button:nth-child(2) {
+}
+
+/*//// HOUR OPEN CONTAINER ////*/
+.hour-container--open {
+}
+.hour-number-open {
+	position: relative;
+}
+
+/*//// HOUR CLOSE CONTAINER ////*/
+.hour-container--close {
+}
+.hour-number-close {
 }

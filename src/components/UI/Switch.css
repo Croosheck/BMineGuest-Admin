@@ -5,11 +5,13 @@
 }
 
 .react-switch-label {
+	--switch-width: 100%;
+
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
 	cursor: pointer;
-	width: 100%;
+	width: var(--switch-width);
 	height: 100%;
 	background: grey;
 	border-radius: 100px;
@@ -18,12 +20,12 @@
 }
 
 .react-switch-label .react-switch-button {
+	--switch-button-height: 1.5rem;
 	content: "";
 	position: absolute;
-	top: 4%;
 	left: 2%;
-	width: 46%;
-	height: 92%;
+	width: calc(var(--switch-button-height));
+	height: var(--switch-button-height);
 	border-radius: 100px;
 	transition: 0.2s;
 	background: #fff;

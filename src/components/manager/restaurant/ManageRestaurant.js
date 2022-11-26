@@ -93,24 +93,58 @@ function ManageRestaurant() {
 		getCurrentData();
 	}, [tagsData.availableTags.length]);
 
+	//Week Schedule
 	function switchDayOpenHandler(pickedDay) {
 		setOpenDays((prev) => {
-			const updatedOpenDays = prev.map((day) => {
-				if (day.day === pickedDay.day) {
-					day.isOpen = !day.isOpen;
+			const updatedSchedule = prev.map((dayData) => {
+				if (dayData.day === pickedDay.day) {
+					dayData.isOpen = !dayData.isOpen;
 				}
 
-				return weekScheduleDay(day);
+				return weekScheduleDay(dayData);
 			});
 
 			toggleRestaurantState({
-				openDays: updatedOpenDays,
+				openDays: updatedSchedule,
 			});
 
-			return updatedOpenDays;
+			return updatedSchedule;
 		});
 	}
 
+	function reservationsHourHandler(pickedDay, operation) {
+		let updatedHours = {
+			reservationsOpen: pickedDay.hours.reservationsOpen,
+			reservationsClose: pickedDay.hours.reservationsClose,
+		};
+
+		if (operation === "openDecrease")
+			updatedHours.reservationsOpen = --pickedDay.hours.reservationsOpen;
+		if (operation === "openIncrease")
+			updatedHours.reservationsOpen = ++pickedDay.hours.reservationsOpen;
+		if (operation === "closeDecrease")
+			updatedHours.reservationsClose = --pickedDay.hours.reservationsClose;
+		if (operation === "closeIncrease")
+			updatedHours.reservationsClose = ++pickedDay.hours.reservationsClose;
+
+		setOpenDays((prev) => {
+			const updatedSchedule = prev.map((dayData) => {
+				if (dayData.day === pickedDay.day) {
+					dayData.hours = updatedHours;
+				}
+
+				return dayData;
+			});
+
+			toggleRestaurantState({
+				openDays: updatedSchedule,
+			});
+
+			return updatedSchedule;
+		});
+	}
+
+	//Toggle
 	function switchToggleHandler(value) {
 		setToggleData((prev) => {
 			toggleRestaurantState({
@@ -124,6 +158,7 @@ function ManageRestaurant() {
 		});
 	}
 
+	//Limits
 	function reservationLimitHandler(type, data) {
 		if (data === "reservationLimit") {
 			if (type === "substract" && restaurantData.reservationLimit > 1) {
@@ -167,6 +202,28 @@ function ManageRestaurant() {
 									name={day.dayLong}
 									isOpen={day.isOpen}
 									handleToggle={() => switchDayOpenHandler(day)}
+									open={day.hours.reservationsOpen}
+									close={day.hours.reservationsClose}
+									onOpenDecrease={reservationsHourHandler.bind(
+										this,
+										day,
+										"openDecrease"
+									)}
+									onOpenIncrease={reservationsHourHandler.bind(
+										this,
+										day,
+										"openIncrease"
+									)}
+									onCloseDecrease={reservationsHourHandler.bind(
+										this,
+										day,
+										"closeDecrease"
+									)}
+									onCloseIncrease={reservationsHourHandler.bind(
+										this,
+										day,
+										"closeIncrease"
+									)}
 								/>
 							);
 						})}
