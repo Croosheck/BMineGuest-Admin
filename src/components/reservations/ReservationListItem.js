@@ -1,11 +1,16 @@
 import "./ReservationListItem.css";
-import React from "react";
+import { FcCheckmark, FcCancel, FcPhone } from "react-icons/fc";
+import { FaTrashAlt, FaTimes, FaPhoneAlt } from "react-icons/fa";
+import { BsCheckLg, BsHourglassSplit } from "react-icons/bs";
+import DetailsContainer from "./details/DetailsContainer";
+import { formatDate } from "../../util/formatDate";
 
 function ReservationListItem({
 	clientsName,
 	clientsEmail,
 	extrasTotalPrice,
 	reservationDate,
+	reservationDateTimestamp,
 	table,
 	extras,
 	extrasImgs,
@@ -19,20 +24,35 @@ function ReservationListItem({
 	onClick,
 	reservationPicked,
 	howMany,
+	requestData = Object(),
 }) {
 	const people = table.tSeats === 1 ? "guest" : "guests";
 
-	function openReservationHandler() {}
-
 	function getReservationStatusHandler() {
 		if (!confirmed && !cancelled && !callRequest)
-			return <div className="reservartion-status --pending">Pending</div>;
+			return (
+				<div className="reservartion-status --pending">
+					<BsHourglassSplit />
+				</div>
+			);
 		if (confirmed)
-			return <div className="reservartion-status --confirmed">Confirmed</div>;
+			return (
+				<div className="reservartion-status --confirmed">
+					<BsCheckLg />
+				</div>
+			);
 		if (cancelled)
-			return <div className="reservartion-status --cancelled">Cancelled</div>;
+			return (
+				<div className="reservartion-status --cancelled">
+					<FaTimes />
+				</div>
+			);
 		if (!confirmed && !cancelled && callRequest)
-			return <div className="reservartion-status --callRequest">Call</div>;
+			return (
+				<div className="reservartion-status --callRequest">
+					<FaPhoneAlt />
+				</div>
+			);
 	}
 
 	const reservationStatus = getReservationStatusHandler();
@@ -41,37 +61,54 @@ function ReservationListItem({
 		<div className="reservation-container">
 			<div
 				className={`reservation-inner-container ${
-					reservationPicked && "--reservation-details"
+					reservationPicked && "--reservation-infos"
 				}`}
 			>
 				<div className="reservation--top-inner-container">
-					<div className="reservation-details">
-						<div className="reservation-detail --name">
+					{/* ///////////////SECTION INFO/////////////// */}
+					<div className="reservation-infos">
+						<div className="reservation-info --name">
 							👤&nbsp;<div className="name">{clientsName}</div>
 						</div>
-						<div className="reservation-detail --email">
+						<div className="reservation-info --email">
 							📧&nbsp;
 							<a href={`mailto:${clientsEmail}`} className="email">
 								{clientsEmail}
 							</a>
 						</div>
 
-						<div className="reservation-detail --date">
+						<div className="reservation-info --date">
 							📆&nbsp;<div className="date">{reservationDate}</div>
+							{/* 📆&nbsp;
+							<div className="date">{formatDate(reservationDateTimestamp)}</div> */}
 						</div>
-						<div className="reservation-detail --table">
-							👥&nbsp;<div className="table">{howMany}</div>&nbsp;{people}
+						<div className="reservation-info --guests">
+							👥&nbsp;<div className="guests">{howMany}</div>&nbsp;{people}
 						</div>
-						<div className="reservation-detail --xPrice">
+						<div className="reservation-info --xPrice">
 							💰&nbsp;
 							<div className="xPrice">{extrasTotalPrice}$</div>
 						</div>
+						{requestData.requestType && (
+							<>
+								<div className="reservation-info --userRequest">
+									User Request:&nbsp;
+									<div className="userRequest">{requestData.requestType}</div>
+								</div>
+								<div className="reservation-info --requestMessage">
+									Request Message:&nbsp;
+									<div className="requestMessage">
+										{requestData.requestMessage}
+									</div>
+								</div>
+							</>
+						)}
 					</div>
-					{/* ///////////////SECTION/////////////// */}
+					{/* ///////////////SECTION STATUS/////////////// */}
 					<div className="reservation-status-container">
 						{reservationStatus}
 					</div>
-					{/* ///////////////SECTION/////////////// */}
+					{/* ///////////////SECTION OPTIONS/////////////// */}
 					<div className="reservation-options">
 						<div className="dropdown">
 							<button className="dropbtn">Options</button>
@@ -81,60 +118,34 @@ function ReservationListItem({
 										className="dropdown-content-btn dropdown-btn-left"
 										onClick={onConfirm}
 									>
-										Confirm
+										<FcCheckmark />
 									</button>
 									<button
 										className="dropdown-content-btn dropdown-btn-right"
 										onClick={onCancel}
 									>
-										Cancel
+										<FcCancel />
 									</button>
 								</div>
 								<button
 									className="reservation-callus-btn"
 									onClick={onCallRequest}
 								>
-									Call Request
+									<FcPhone />
 								</button>
 								<button className="reservation-delete-btn" onClick={onDelete}>
-									Delete
+									<FaTrashAlt />
 								</button>
 							</div>
 						</div>
 					</div>
 				</div>
 				{reservationPicked && (
-					<div className="reservation--details-container">
-						<div className="details--inner-container">
-							<div className="details--extras-list-container">
-								{extras.map((xItem, i) => {
-									return (
-										<div
-											key={i}
-											className="details--inner-container--extraItem"
-										>
-											<div className="details--extra-name">{xItem.xName}</div>
-											<img
-												src={extrasImgs[xItem.xFileName.slice(0, -4)]}
-												alt="Extra Item"
-											/>
-											<div className="details--extra-price">
-												{xItem.xPrice}$
-											</div>
-										</div>
-									);
-								})}
-							</div>
-							<div className="details-label">EXTRAS</div>
-						</div>
-						<div className=" details--inner-container">
-							<div className="details--table-list-container">
-								<div>{table.tSeats}</div>
-								<div>{table.tShape}</div>
-							</div>
-							<div className="details-label">TABLE</div>
-						</div>
-					</div>
+					<DetailsContainer
+						extras={extras}
+						extrasImgs={extrasImgs}
+						table={table}
+					/>
 				)}
 				<button className="reservation-item--details-button" onClick={onClick}>
 					Details

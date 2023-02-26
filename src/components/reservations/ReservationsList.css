@@ -19,6 +19,7 @@
 	overflow-x: hidden;
 	scroll-behavior: smooth;
 	transition: ease-in-out 0.5s;
+	height: 100%;
 }
 
 .item-enter {

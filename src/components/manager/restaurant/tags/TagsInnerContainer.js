@@ -1,4 +1,5 @@
 import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { auth, db } from "../../../../firebase";
 import TagItem from "./TagItem";
 import "./TagsInnerContainer.css";
@@ -37,16 +38,18 @@ function TagsInnerContainer({ availableTags, pickedTags }) {
 			</fieldset>
 			<fieldset>
 				<legend>Picked Tags</legend>
-				<div>
+				<TransitionGroup component="div">
 					{pickedTags.map((tag, i) => (
-						<TagItem
-							key={i}
-							picked
-							title={tag.tagName}
-							onClick={onPickedTagClickHandler.bind(this, tag)}
-						/>
+						<CSSTransition key={tag.tagName} timeout={800} classNames="tag">
+							<TagItem
+								key={i}
+								picked
+								title={tag.tagName}
+								onClick={onPickedTagClickHandler.bind(this, tag)}
+							/>
+						</CSSTransition>
 					))}
-				</div>
+				</TransitionGroup>
 			</fieldset>
 		</div>
 	);

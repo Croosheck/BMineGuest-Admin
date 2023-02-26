@@ -1,0 +1,101 @@
+.reservation--details-container {
+	margin: 10px 0;
+	padding: 20px 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-top: 0.5px solid rgba(0, 0, 0, 0.123);
+}
+.details--inner-container {
+	background: linear-gradient(
+		135deg,
+		var(--gradientBackground1) 0%,
+		var(--gradientBackground2) 50%,
+		var(--gradientBackground3) 100%
+	);
+
+	width: 100%;
+	max-width: 30rem;
+	height: 15rem;
+	min-height: 15rem;
+	margin: 10px 10px;
+	padding: 10px 10px;
+	border-radius: 10px;
+	transition: ease-in-out 0.2s;
+	box-shadow: 2px 1px 5px 0 rgba(0, 0, 0, 0.222);
+}
+.details--extras-list-container {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	overflow-x: hidden;
+}
+.details--table-list-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	overflow-x: hidden;
+	color: black;
+}
+.details-label {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	margin-top: 15px;
+	color: black;
+	border-bottom: 0.5px solid rgba(0, 0, 0, 0.152);
+	font-size: 90%;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.details--inner-container--extraItem {
+	/* background-color: #e2e2e2; */
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	width: 120px;
+	height: 110px;
+	margin: 10px;
+	padding: 10px;
+	border-radius: 20px;
+	box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.2);
+	overflow: hidden;
+}
+
+.details--extra-name {
+	position: absolute;
+	top: 0;
+	margin-top: 0.2rem;
+	text-align: center;
+	color: black;
+	font-size: 80%;
+	font-family: cursive;
+}
+.details--inner-container--extraItem img {
+	height: 65%;
+	user-select: none;
+}
+.details--extra-price {
+	position: absolute;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	bottom: 0%;
+	text-align: center;
+	color: black;
+	font-size: 80%;
+	width: 85%;
+	padding: 0.15rem 0;
+	font-weight: bold;
+	border-top: 1px solid rgba(0, 0, 0, 0.16);
+}

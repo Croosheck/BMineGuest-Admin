@@ -24,13 +24,13 @@
 	border: 2px solid rgba(134, 134, 134, 0.292);
 }
 
-@media (width > 850px) {
+@media (width >= 850px) {
 	.manageExtras-manage {
 		width: 45vw;
 		height: 30vw;
 	}
 }
-@media (width < 850px) {
+@media (width <= 850px) {
 	.manageExtras-manage {
 		width: 30vw;
 		height: 70vw;
@@ -56,4 +56,19 @@
 	flex-wrap: wrap;
 	overflow: auto;
 	overflow-x: none;
+}
+
+.pickedExtra-enter {
+	opacity: 0;
+	transform: scale(0);
+}
+.pickedExtra-enter-active {
+	opacity: 1;
+	transform: scale(1);
+	transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+.pickedExtra-exit-active {
+	opacity: 0;
+	transform: scale(0);
+	transition: opacity 1s ease-out, transform 1s ease-out;
 }

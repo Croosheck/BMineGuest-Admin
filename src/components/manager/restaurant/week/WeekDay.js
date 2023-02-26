@@ -38,7 +38,7 @@ function WeekDay({
 			<div className="week-day--hours--main-container">
 				<div className="week-day--hour-container hour-container--open">
 					<div className="week-day--hour-number hour-number-open">
-						Open: {open ? open : "N/A"}
+						Open: {open ?? open ?? "N/A"}
 					</div>
 					<div className="week-day--hour-buttons-container">
 						<button onClick={onOpenDecrease}>—</button>
@@ -47,7 +47,7 @@ function WeekDay({
 				</div>
 				<div className="week-day--hour-container hour-container--close">
 					<div className="week-day--hour-number hour-number-close">
-						Closed: {close ? close : "N/A"}
+						Closed: {close ?? close ?? "N/A"}
 					</div>
 					<div className="week-day--hour-buttons-container">
 						<button onClick={onCloseDecrease}>—</button>

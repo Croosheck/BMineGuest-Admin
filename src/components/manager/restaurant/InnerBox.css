@@ -1,7 +1,7 @@
 .manage-restaurant--inner-box {
-	--innerbox-maxwidth: 550px;
+	--innerbox-minheight: 300px;
 	--innerbox-minwidth: 390px;
-	--innerbox-minheight: 250px;
+	--innerbox-maxwidth: 550px;
 
 	position: relative;
 	display: flex;
@@ -19,22 +19,20 @@
 	display: flex;
 	justify-content: center;
 	position: absolute;
-	left: 0;
 	width: 100%;
 	height: 100%;
 	padding: 10px 10px;
 	overflow-y: auto;
 	overflow-x: hidden;
 }
-/* .inner-box--inner-container ul {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-} */
+.inner-box--inner-container ul {
+}
 
 .inner-box--inner-container--wrap {
 	display: flex;
+	justify-content: center;
 	flex-wrap: wrap;
+	height: 100%;
 }
 
 fieldset.manage-restaurant--inner-box {

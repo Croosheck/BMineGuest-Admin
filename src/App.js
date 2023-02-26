@@ -1,7 +1,7 @@
 import "./App.css";
 import { getAuth, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import Login from "./components/auth/Login";
 import ReservationsList from "./components/reservations/ReservationsList";
@@ -25,10 +25,6 @@ function App() {
 		loggedIn: false,
 	});
 	const [restaurantEmail, setRestaurantEmail] = useState();
-
-	const { name } = useSelector(
-		(state) => state.restaurantReducer.currentRestaurant
-	);
 
 	useEffect(() => {
 		getAuth().onAuthStateChanged((user) => {
@@ -56,7 +52,7 @@ function App() {
 		return (
 			<div className="app-container">
 				<div className="inner-container login-container">
-					<div className="box-container ">LOADING...</div>
+					<div className="loading-container ">LOADING...</div>
 				</div>
 			</div>
 		);

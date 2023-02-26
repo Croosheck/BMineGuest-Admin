@@ -16,7 +16,7 @@ function AvailableExtraTile({ label, url, picked, onClick, onSubmit }) {
 				className={`available-extras-item ${
 					picked && "available-extras-dropdown-active"
 				}`}
-				onClick={onClick}
+				onClick={() => onClick(priceRef)}
 			>
 				<div className="extras-item-picture">{extraImage}</div>
 				<div className="extras-item-label-container">
@@ -30,6 +30,7 @@ function AvailableExtraTile({ label, url, picked, onClick, onSubmit }) {
 					<form
 						className="availableExtra-dropdown-inner-content"
 						onSubmit={(e, value) => onSubmit(e, priceRef, value)}
+						type="number"
 					>
 						<h6>Price:</h6>
 						<input

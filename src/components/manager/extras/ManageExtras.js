@@ -1,5 +1,5 @@
 import "./ManageExtras.css";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import AvailableExtraTile from "./AvailableExtraTile";
 import { getAuth } from "firebase/auth";
 import {
@@ -22,8 +22,9 @@ import {
 	setAvailableExtrasGlobal,
 } from "../../../redux/slices/restaurant";
 import RestaurantExtraTile from "./RestaurantExtraTile";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-function ManageExtras(props) {
+function ManageExtras() {
 	const [availableExtras, setAvailableExtras] = useState([]);
 	const [extrasImages, setExtrasImages] = useState({});
 	const [restaurantExtras, setRestaurantExtras] = useState([]);
@@ -82,6 +83,20 @@ function ManageExtras(props) {
 			? 0
 			: parseFloat(priceRef.current.value).toFixed(2);
 
+		if (priceRef.current.value < 0) {
+			alert("Invalid data. Only positive numbers allowed.");
+		}
+
+		if (priceRef.current.value.split("").includes("e")) {
+			alert("Invaild data. Only numbers allowed.");
+			return;
+		}
+
+		if (priceRef.current.value >= 9999) {
+			alert("Invaild data. 9999 is a max value.");
+			return;
+		}
+
 		await updateDoc(restaurantRef, {
 			extras: arrayUnion({
 				xName: item.xName,
@@ -121,13 +136,26 @@ function ManageExtras(props) {
 									label={item.xName}
 									url={item.xUrl}
 									picked={item.xPicked}
-									onClick={() => {
-										dispatch(resetPickedExtras(availableExtras));
-										dispatch(pickedExtra(item.xName));
-									}}
 									onSubmit={(e, priceRef) =>
 										addNewExtraHandler(e, priceRef, item)
 									}
+									onClick={(priceRef) => {
+										if (!item.xPicked) {
+											priceRef.current.value = "";
+										}
+
+										if (
+											restaurantExtras.some(
+												(extra) => extra.xName === item.xName
+											)
+										) {
+											alert("This item has been added already!");
+											return;
+										}
+
+										dispatch(resetPickedExtras(availableExtras));
+										dispatch(pickedExtra(item.xName));
+									}}
 								/>
 							);
 						})}
@@ -135,19 +163,25 @@ function ManageExtras(props) {
 				</fieldset>
 				<fieldset className="manageExtras-manage">
 					<legend>Picked Extras</legend>
-					<div className="manageExtras-available-extras-list">
+					<TransitionGroup className="manageExtras-available-extras-list">
 						{restaurantExtras.map((item, index) => {
 							return (
-								<RestaurantExtraTile
-									key={index}
-									label={item.xName}
-									xPrice={item.xPrice}
-									url={extrasImages[item.xFileName.slice(0, -4)]}
-									onDelete={(e) => onDeleteExtraHandler(e, item)}
-								/>
+								<CSSTransition
+									key={item.xName}
+									timeout={300}
+									classNames="pickedExtra"
+								>
+									<RestaurantExtraTile
+										key={index}
+										label={item.xName}
+										xPrice={item.xPrice}
+										url={extrasImages[item.xFileName.slice(0, -4)]}
+										onDelete={(e) => onDeleteExtraHandler(e, item)}
+									/>
+								</CSSTransition>
 							);
 						})}
-					</div>
+					</TransitionGroup>
 				</fieldset>
 			</div>
 		</div>

@@ -79,31 +79,41 @@ function ReservationsList() {
 		getAvailableExtras();
 	}, [dispatch]);
 
-	async function deleteReservation(collection, uid, filename) {
-		await deleteDoc(doc(db, collection, uid, "reservations", filename));
-	}
-
 	async function deleteReservationHandler(reservation) {
 		// Delete reservation for the restaurant
-		await deleteReservation(
-			"restaurants",
-			auth.currentUser.uid,
-			reservation.filename
+		await deleteDoc(
+			doc(
+				db,
+				"restaurants",
+				auth.currentUser.uid,
+				"reservations",
+				reservation.filename
+			)
 		);
 
+		////// to redevelopment...
 		// Delete reservation for the client
-		await deleteReservation(
-			"users",
-			reservation.clientsUid,
-			reservation.filename
+		await deleteDoc(
+			doc(
+				db,
+				"users",
+				reservation.clientsUid,
+				"reservations",
+				reservation.filename
+			)
 		);
 	}
 
 	if (!loaded) {
-		return <div className="empty-list-loading">Loading...</div>;
+		// 	return <div className="empty-list-loading">Loading...</div>;
 	}
 
 	const itemsList = reservationsList.map((reservation, index) => {
+		////// temporary
+		if (reservation.clientsEmail !== "111@111.com") {
+			return [];
+		}
+
 		return (
 			<CSSTransition key={reservation.filename} timeout={800} classNames="item">
 				<ReservationListItem
@@ -113,6 +123,8 @@ function ReservationsList() {
 					howMany={reservation.howMany}
 					extrasTotalPrice={reservation.extrasTotalPrice}
 					reservationDate={reservation.reservationDate}
+					reservationDateTimestamp={reservation.reservationDateTimestamp}
+					requestData={reservation.requestData}
 					table={reservation.table}
 					extras={reservation.extras}
 					extrasImgs={extrasImgs}

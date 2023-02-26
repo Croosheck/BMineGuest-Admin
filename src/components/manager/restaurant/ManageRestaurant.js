@@ -1,6 +1,5 @@
 import "./ManageRestaurant.css";
 import { useEffect, useState } from "react";
-import { toggleRestaurantState } from "../../../util/toggleRestaurantState";
 import {
 	collection,
 	doc,
@@ -9,16 +8,20 @@ import {
 	query,
 } from "firebase/firestore";
 import { auth, db } from "../../../firebase";
-import InnerBox from "./InnerBox";
-import InnerBoxToggleItem from "./toggle/toggleItem/InnerBoxToggleItem";
 import { camelToTitle } from "../../../util/camelToTitle";
-import InnerBoxReservationLimitItem from "./limits/reservationLimitItem/InnerBoxReservationLimitItem";
-import InnerBoxReservationAdvanceItem from "./limits/advanceItem/InnerBoxReservationAdvanceItem";
-import { manipulateNumbersData } from "../../../util/manipulateNumbersData";
-import TagsInnerContainer from "./tags/TagsInnerContainer";
+import { updateDataFields } from "../../../util/manipulateNumbersData";
+
+import InnerBox from "./InnerBox";
 import WeekSchedule from "./week/WeekSchedule";
 import WeekDay from "./week/WeekDay";
 import { weekScheduleDay } from "../../../util/weekSchedule";
+import InnerBoxToggleItem from "./toggle/InnerBoxToggleItem";
+import { toggleRestaurantState } from "../../../util/toggleRestaurantState";
+import InnerBoxReservationLimitItem from "./limits/reservationLimitItem/InnerBoxReservationLimitItem";
+import InnerBoxReservationAdvanceItem from "./limits/reservationAdvanceItem/InnerBoxReservationAdvanceItem";
+import TagsInnerContainer from "./tags/TagsInnerContainer";
+import InnerBoxCancellationAdvanceItem from "./limits/cancellationAdvanceItem/InnerBoxCancellationAdvanceItem";
+import DescriptionItem from "./input/description/DescriptionItem";
 
 const MS_PER_DAY = 86400000;
 
@@ -32,10 +35,20 @@ function ManageRestaurant() {
 	const [limitsData, setLimitsData] = useState({
 		reservationLimit: "Loading...",
 		reservationAdvance: "Loading...",
+		cancellationAdvance: "Loading...",
 	});
 	const [tagsData, setTagsData] = useState({
 		availableTags: [],
 		pickedTags: [],
+	});
+	const [inputData, setInputData] = useState({
+		description: "",
+		phone: "",
+		url: "",
+	});
+	const [submitResult, setSubmitResult] = useState({
+		message: null,
+		isHold: false,
 	});
 
 	useEffect(() => {
@@ -62,6 +75,7 @@ function ManageRestaurant() {
 				setLimitsData(() => ({
 					reservationLimit: doc.data().reservationLimit,
 					reservationAdvance: doc.data().reservationAdvance,
+					cancellationAdvance: doc.data().cancellationAdvance,
 				}));
 
 				//real-time PICKED tags
@@ -69,6 +83,13 @@ function ManageRestaurant() {
 					availableTags: [...prev.availableTags],
 					pickedTags: [...doc.data().restaurantTags],
 				}));
+
+				//real-time input data
+				setInputData({
+					description: doc.data().description,
+					phone: doc.data().phone,
+					url: doc.data().url,
+				});
 			});
 
 			// TAGS //
@@ -118,13 +139,22 @@ function ManageRestaurant() {
 			reservationsClose: pickedDay.hours.reservationsClose,
 		};
 
-		if (operation === "openDecrease")
+		const isOpenEqualZero = pickedDay.hours.reservationsOpen === 0;
+		const isOpenSmaller =
+			pickedDay.hours.reservationsOpen < pickedDay.hours.reservationsClose - 1;
+
+		const isCloseEqual23 = pickedDay.hours.reservationsClose === 23;
+
+		if (operation === "openDecrease" && !isOpenEqualZero)
 			updatedHours.reservationsOpen = --pickedDay.hours.reservationsOpen;
-		if (operation === "openIncrease")
+
+		if (operation === "openIncrease" && isOpenSmaller)
 			updatedHours.reservationsOpen = ++pickedDay.hours.reservationsOpen;
-		if (operation === "closeDecrease")
+
+		if (operation === "closeDecrease" && isOpenSmaller)
 			updatedHours.reservationsClose = --pickedDay.hours.reservationsClose;
-		if (operation === "closeIncrease")
+
+		if (operation === "closeIncrease" && !isCloseEqual23)
 			updatedHours.reservationsClose = ++pickedDay.hours.reservationsClose;
 
 		setOpenDays((prev) => {
@@ -162,32 +192,71 @@ function ManageRestaurant() {
 	function reservationLimitHandler(type, data) {
 		if (data === "reservationLimit") {
 			if (type === "substract" && restaurantData.reservationLimit > 1) {
-				manipulateNumbersData({
+				updateDataFields({
 					reservationLimit: restaurantData.reservationLimit - 1,
 				});
 			}
 			if (type === "add") {
-				manipulateNumbersData({
+				updateDataFields({
 					reservationLimit: restaurantData.reservationLimit + 1,
 				});
 			}
 		}
 
-		if (data === "advanceLimit") {
+		if (data === "reservationAdvance") {
 			if (
 				type === "substract" &&
 				restaurantData.reservationAdvance / MS_PER_DAY > 0
 			) {
-				manipulateNumbersData({
+				updateDataFields({
 					reservationAdvance: restaurantData.reservationAdvance - MS_PER_DAY,
 				});
 			}
 			if (type === "add") {
-				manipulateNumbersData({
+				updateDataFields({
 					reservationAdvance: restaurantData.reservationAdvance + MS_PER_DAY,
 				});
 			}
 		}
+
+		if (data === "cancellationAdvance") {
+			if (
+				type === "substract" &&
+				restaurantData.cancellationAdvance / MS_PER_DAY > 0
+			) {
+				updateDataFields({
+					cancellationAdvance: restaurantData.cancellationAdvance - MS_PER_DAY,
+				});
+			}
+			if (type === "add") {
+				updateDataFields({
+					cancellationAdvance: restaurantData.cancellationAdvance + MS_PER_DAY,
+				});
+			}
+		}
+	}
+
+	//Input
+	function onInputSubmit(data) {
+		if (submitResult.isHold) return;
+
+		updateDataFields({
+			description: data.description,
+			phone: data.phone,
+			url: data.url,
+		});
+
+		setSubmitResult({
+			message: "Submitted!",
+			isHold: true,
+		});
+
+		setTimeout(() => {
+			setSubmitResult({
+				message: null,
+				isHold: false,
+			});
+		}, 3000);
 	}
 
 	return (
@@ -266,9 +335,30 @@ function ManageRestaurant() {
 						onSubstract={reservationLimitHandler.bind(
 							this,
 							"substract",
-							"advanceLimit"
+							"reservationAdvance"
 						)}
-						onAdd={reservationLimitHandler.bind(this, "add", "advanceLimit")}
+						onAdd={reservationLimitHandler.bind(
+							this,
+							"add",
+							"reservationAdvance"
+						)}
+					/>
+					<InnerBoxCancellationAdvanceItem
+						value={
+							typeof limitsData.cancellationAdvance === "number"
+								? limitsData.cancellationAdvance / MS_PER_DAY
+								: limitsData.cancellationAdvance
+						}
+						onSubstract={reservationLimitHandler.bind(
+							this,
+							"substract",
+							"cancellationAdvance"
+						)}
+						onAdd={reservationLimitHandler.bind(
+							this,
+							"add",
+							"cancellationAdvance"
+						)}
 					/>
 				</InnerBox>
 				<InnerBox title="Tags">
@@ -276,6 +366,52 @@ function ManageRestaurant() {
 						availableTags={tagsData.availableTags}
 						pickedTags={tagsData.pickedTags}
 					/>
+				</InnerBox>
+				<InnerBox title="Input">
+					<DescriptionItem
+						title="Profile Description"
+						inputStyle="description-input"
+						inputType="text"
+						onChange={(value) =>
+							setInputData((prev) => ({
+								...prev,
+								description: value,
+							}))
+						}
+						value={inputData.description}
+					/>
+					<DescriptionItem
+						title="Phone Number"
+						inputStyle="phone-input"
+						inputType="number"
+						letterSpacing={1}
+						onChange={(value) => {
+							setInputData((prev) => ({
+								...prev,
+								phone: value,
+							}));
+						}}
+						value={inputData.phone}
+					/>
+					<DescriptionItem
+						title="URL"
+						inputStyle="url-input"
+						inputType="text"
+						onChange={(value) => {
+							setInputData((prev) => ({
+								...prev,
+								url: value,
+							}));
+						}}
+						value={inputData.url}
+					/>
+					<button
+						className="manage-restaurant--input-container--button"
+						onClick={onInputSubmit.bind(this, inputData)}
+						data-input-submit-result={submitResult.message}
+					>
+						Submit
+					</button>
 				</InnerBox>
 			</div>
 		</div>

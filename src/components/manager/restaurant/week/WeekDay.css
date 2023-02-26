@@ -1,6 +1,7 @@
 .week-day--container {
 	--weekday-width: calc((100% - (6 * var(--weekDay-gap))) / 7);
 	--weekday-padding: 5px;
+	--status-light-size: 1.5rem;
 
 	flex: 0 1 var(--weekday-width);
 	min-width: 130px;
@@ -54,8 +55,10 @@
 	position: relative;
 	margin: 0 0.5rem;
 }
+div[data-reservations-status] {
+	transition: ease-in-out 0.3s;
+}
 div[data-reservations-status] > div {
-	--status-light-size: 1.5rem;
 	width: var(--status-light-size);
 	height: var(--status-light-size);
 	border-radius: calc(var(--status-light-size) * 0.5);
@@ -66,14 +69,25 @@ div[data-reservations-status] > div {
 		rgba(255, 255, 255, 0.593) 60%,
 		rgba(255, 255, 255, 0.867) 80%
 	);
+
 	transition: ease-in-out 0.3s;
+}
+div[data-reservations-status*="open"] {
+	border-radius: calc(var(--status-light-size) * 0.5);
+	box-shadow: 0 0 10px 0 rgba(172, 255, 47, 0.86);
 }
 div[data-reservations-status*="open"] > div {
 	background-color: greenyellow;
 }
+
+div[data-reservations-status*="close"] {
+	border-radius: calc(var(--status-light-size) * 0.5);
+	box-shadow: 0 0 10px 0 rgba(255, 0, 0, 0.86);
+}
 div[data-reservations-status*="closed"] > div {
 	background-color: red;
 }
+
 div[data-reservations-status]::before {
 	content: attr(data-reservations-status);
 	transition: ease-in-out 0.15s;
@@ -131,7 +145,7 @@ div[data-reservations-status]:hover::before {
 	margin-bottom: 0.2rem;
 }
 .week-day--hour-number::after {
-	content: " (24h)";
+	content: " /24h";
 	font-size: 0.6rem;
 	position: absolute;
 	margin-left: 0.5ch;
@@ -163,7 +177,7 @@ div[data-reservations-status]:hover::before {
 	border: 2px solid rgba(0, 0, 0, 0.092);
 }
 .week-day--hour-buttons-container > button:hover {
-	scale: 1.1;
+	scale: 0.94;
 	background-color: hsl(207, 82%, 58%);
 }
 .week-day--hour-buttons-container > button:nth-child(2) {

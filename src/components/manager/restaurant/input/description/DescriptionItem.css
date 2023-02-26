@@ -1,0 +1,72 @@
+.input-container {
+	border: none;
+	margin-bottom: 20px;
+}
+
+.input-container > legend {
+	color: #000000;
+	font-size: 0.8rem;
+	text-decoration: underline;
+}
+
+.input-container--description-innerContainer {
+}
+
+.input-container--description-innerContainer > * {
+	margin: 5px 0 0 0;
+	padding: 10px 5px;
+	border: none;
+	box-shadow: 0px 2px 3px 0 rgba(0, 0, 0, 0.477);
+}
+
+.input-container--description-innerContainer > textarea {
+	resize: none;
+	width: 100%;
+}
+
+.input-container--description-innerContainer > input {
+	width: 100%;
+}
+
+.description-input {
+}
+.phone-input {
+}
+.url-input {
+}
+
+.manage-restaurant--input-container--button {
+	border: none;
+	padding: 5px 10px;
+	cursor: pointer;
+	border-radius: 5px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-weight: 600;
+	background-color: rgb(152, 200, 255);
+	color: white;
+	text-shadow: 0 2px 3px rgba(0, 0, 0, 0.505);
+	transition: all ease-in-out 0.1s;
+	margin-bottom: 20px;
+	position: relative;
+	width: 100%;
+}
+.manage-restaurant--input-container--button:hover {
+	background-color: rgb(91, 167, 255);
+}
+
+button[data-input-submit-result]::after {
+	content: attr(data-input-submit-result);
+	color: black;
+	position: absolute;
+	pointer-events: none;
+	font-size: 1.1rem;
+	color: rgb(0, 255, 123);
+	text-shadow: 0 0 5px rgb(0, 0, 0);
+	background-color: rgb(255, 255, 255);
+	width: inherit;
+	border-radius: inherit;
+	padding: inherit;
+}
