@@ -12,6 +12,7 @@ function ReservationListItem({
 	reservationDate,
 	reservationDateTimestamp,
 	table,
+	tableImgUrl,
 	extras,
 	extrasImgs,
 	onDelete,
@@ -145,6 +146,7 @@ function ReservationListItem({
 						extras={extras}
 						extrasImgs={extrasImgs}
 						table={table}
+						tableImgUrl={tableImgUrl}
 					/>
 				)}
 				<button className="reservation-item--details-button" onClick={onClick}>

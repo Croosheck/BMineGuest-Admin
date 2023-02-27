@@ -19,15 +19,66 @@ import {
 import ReservationListItem from "./ReservationListItem";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { changeReservationStatus } from "../../util/storage";
-import { getDownloadURL, ref } from "firebase/storage";
+import { getDownloadURL, listAll, ref } from "firebase/storage";
 
 function ReservationsList() {
 	const [loaded, setLoaded] = useState(false);
 	const [extrasImgs, setExtrasImgs] = useState({});
+	const [tablesImgs, setTablesImgs] = useState({});
 
 	const { reservationsList } = useSelector((state) => state.restaurantReducer);
 
 	const dispatch = useDispatch();
+
+	const qExtrasImgs = query(collection(db, "extras"));
+
+	async function getAvailableExtras() {
+		setExtrasImgs({});
+
+		const querySnapshot = await getDocs(qExtrasImgs);
+
+		querySnapshot.forEach(async (doc) => {
+			const extraImg = ref(storage, `extras/${doc.id}.png`);
+
+			const extraImgUrl = await getDownloadURL(extraImg);
+
+			setExtrasImgs((prev) => ({ ...prev, [doc.id]: extraImgUrl }));
+
+			// //For default state (to reset picked item highlight)
+			// setAvailableExtras((prev) => [
+			// 	...prev,
+			// 	{ ...doc.data(), xUrl: extraImgUrl },
+			// ]);
+
+			// dispatch(
+			// 	setAvailableExtrasGlobal({ ...doc.data(), xUrl: extraImgUrl })
+			// );
+		});
+	}
+
+	const tablesImgsRef = ref(
+		storage,
+		`restaurants/${auth.currentUser.uid}/tables`
+	);
+
+	async function getRestaurantTables() {
+		const tablesList = await listAll(tablesImgsRef);
+
+		tablesList.items.forEach(async (table) => {
+			const tableId = table.name.match(/^.*(?=(\.))/g).join("");
+
+			const tableImgRef = ref(
+				storage,
+				`restaurants/${auth.currentUser.uid}/tables/${table.name}`
+			);
+			const tableImgUrl = await getDownloadURL(tableImgRef);
+
+			setTablesImgs((prev) => ({
+				...prev,
+				[tableId]: tableImgUrl,
+			}));
+		});
+	}
 
 	useEffect(() => {
 		getAuth().onAuthStateChanged((user) => {
@@ -52,32 +103,9 @@ function ReservationsList() {
 			dispatch(realTimeReservations(realTimeReservationsData));
 		});
 
-		const qExtrasImgs = query(collection(db, "extras"));
-		async function getAvailableExtras() {
-			setExtrasImgs({});
-
-			const querySnapshot = await getDocs(qExtrasImgs);
-
-			querySnapshot.forEach(async (doc) => {
-				const extraImg = ref(storage, `extras/${doc.id}.png`);
-
-				const extraImgUrl = await getDownloadURL(extraImg);
-
-				setExtrasImgs((prev) => ({ ...prev, [doc.id]: extraImgUrl }));
-
-				// //For default state (to reset picked item highlight)
-				// setAvailableExtras((prev) => [
-				// 	...prev,
-				// 	{ ...doc.data(), xUrl: extraImgUrl },
-				// ]);
-
-				// dispatch(
-				// 	setAvailableExtrasGlobal({ ...doc.data(), xUrl: extraImgUrl })
-				// );
-			});
-		}
 		getAvailableExtras();
-	}, [dispatch]);
+		getRestaurantTables();
+	}, []);
 
 	async function deleteReservationHandler(reservation) {
 		// Delete reservation for the restaurant
@@ -126,6 +154,7 @@ function ReservationsList() {
 					reservationDateTimestamp={reservation.reservationDateTimestamp}
 					requestData={reservation.requestData}
 					table={reservation.table}
+					tableImgUrl={tablesImgs[reservation.table.tId]}
 					extras={reservation.extras}
 					extrasImgs={extrasImgs}
 					confirmed={reservation.confirmed}
