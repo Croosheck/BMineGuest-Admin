@@ -1,0 +1,60 @@
+.modal--backdrop-container {
+	width: 100vw;
+	height: 100vh;
+	z-index: 99;
+	background-color: rgba(0, 0, 0, 0.358);
+	backdrop-filter: blur(5px);
+	position: fixed;
+	inset: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.table-image--modal-container {
+	width: fit-content;
+	height: fit-content;
+	background-color: rgb(0, 0, 0);
+	display: flex;
+	padding: 0.5rem;
+	position: absolute;
+	inset: 0;
+	margin: auto auto;
+	z-index: 999;
+	max-width: 800px;
+}
+#table-modal--close {
+	position: absolute;
+	top: 0;
+	right: 0;
+	background-color: black;
+	padding: 5px 10px;
+	font-weight: 800;
+	align-self: center;
+	cursor: pointer;
+}
+.table-image--modal-container > img {
+	width: 100%;
+	max-height: 80svh;
+}
+.modal--table-details {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	color: rgb(0, 0, 0);
+	position: absolute;
+	top: 100%;
+	left: 0;
+	right: 0;
+	width: 100%;
+	background-color: rgb(255, 255, 255);
+	padding: 3px 0;
+	font-size: 0.8rem;
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: 600;
+	border-radius: 0 0 5px 5px;
+}
+.modal--table-details > p {
+	margin: 0 5px;
+}

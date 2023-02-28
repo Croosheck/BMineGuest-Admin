@@ -26,6 +26,7 @@ function ReservationListItem({
 	reservationPicked,
 	howMany,
 	requestData = Object(),
+	onTableImgClick = () => {},
 }) {
 	const people = table.tSeats === 1 ? "guest" : "guests";
 
@@ -90,20 +91,6 @@ function ReservationListItem({
 							💰&nbsp;
 							<div className="xPrice">{extrasTotalPrice}$</div>
 						</div>
-						{requestData.requestType && (
-							<>
-								<div className="reservation-info --userRequest">
-									User Request:&nbsp;
-									<div className="userRequest">{requestData.requestType}</div>
-								</div>
-								<div className="reservation-info --requestMessage">
-									Request Message:&nbsp;
-									<div className="requestMessage">
-										{requestData.requestMessage}
-									</div>
-								</div>
-							</>
-						)}
 					</div>
 					{/* ///////////////SECTION STATUS/////////////// */}
 					<div className="reservation-status-container">
@@ -149,6 +136,26 @@ function ReservationListItem({
 						tableImgUrl={tableImgUrl}
 					/>
 				)}
+
+				{requestData.requestType && (
+					<div className="user-request-container">
+						<div className="reservation-info --userRequest">
+							User Request:&nbsp;
+							<div className="userRequest">{requestData.requestType}</div>
+						</div>
+						<div className="reservation-info --requestMessage">
+							Message:&nbsp;
+							<div className="requestMessage">{requestData.requestMessage}</div>
+						</div>
+						<div className="reservation-info --requestDate">
+							Made on:&nbsp;
+							<div className="requestDate">
+								{formatDate(requestData.timestamp)}
+							</div>
+						</div>
+					</div>
+				)}
+
 				<button className="reservation-item--details-button" onClick={onClick}>
 					Details
 				</button>

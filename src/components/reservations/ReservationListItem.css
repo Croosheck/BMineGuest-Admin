@@ -113,12 +113,15 @@
 	font-weight: 600;
 }
 
+.user-request-container {
+	max-width: 90%;
+	margin: 0 15px 15px 15px;
+}
 .--userRequest {
 	font-size: 1.15rem;
 }
 .userRequest {
 	font-weight: 600;
-	text-decoration: underline;
 	text-transform: uppercase;
 }
 
@@ -126,6 +129,13 @@
 	font-size: 1.15rem;
 }
 .requestMessage {
+	font-style: italic;
+}
+.--requestDate {
+	font-size: 0.9rem;
+}
+.requestDate {
+	font-weight: 600;
 }
 
 .reservation-status-container {
@@ -320,9 +330,18 @@
 	translate: 0 5%;
 }
 
+@media only screen and (650px <= width < 1000px) {
+	.--userRequest,
+	.--requestMessage,
+	.userRequest,
+	.requestMessage {
+		font-size: 1rem;
+	}
+}
+
 @media only screen and (510px < width < 650px) {
 	.reservation-info {
-		font-size: 1.3rem;
+		font-size: 1rem;
 	}
 	.dropdown {
 		position: absolute;
@@ -338,21 +357,33 @@
 		scale: 0.8;
 		transform: translateY(-1rem);
 	}
+	.--userRequest,
+	.--requestMessage,
+	.userRequest,
+	.requestMessage {
+		font-size: 0.8rem;
+	}
 }
 @media only screen and (max-width: 510px) {
 	.reservation-info {
-		font-size: 1rem;
+		font-size: 0.9rem;
 	}
 	.reservation-inner-container {
 		min-height: 10rem;
 	}
 	.dropdown {
 		position: relative;
-		scale: 0.8;
+		scale: 0.7;
 	}
 	.reservation-status-container {
 		margin-right: 1rem;
-		scale: 0.8;
+		scale: 0.7;
+	}
+	.--userRequest,
+	.--requestMessage,
+	.userRequest,
+	.requestMessage {
+		font-size: 0.8rem;
 	}
 }
 
