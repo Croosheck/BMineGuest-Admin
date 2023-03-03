@@ -39,7 +39,17 @@ function Navbar({ onLogout, name }) {
 				<div className="nav-dropdown">
 					<button className="nav-dropbtn">Manage</button>
 					<div className="nav-dropdown-content">
-						<div className="nav-dropdown-content-btns-inner-container"></div>
+						{/* <div className="nav-dropdown-content-btns-inner-container"></div> */}
+						<NavLink
+							to="/tables"
+							className={(navData) =>
+								navData.isActive
+									? dropdownActiveClass
+									: "nav-dropContent-button"
+							}
+						>
+							Tables
+						</NavLink>
 						<NavLink
 							to="/extras"
 							className={(navData) =>

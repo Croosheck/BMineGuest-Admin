@@ -31,7 +31,9 @@ function DetailsContainer({ extras, extrasImgs, table, tableImgUrl }) {
 								<div key={i} className="details--inner-container--extraItem">
 									<div className="details--extra-name">{xItem.xName}</div>
 									<img
-										src={extrasImgs[xItem.xFileName.slice(0, -4)]}
+										src={
+											extrasImgs[xItem.xFileName.match(/^.*(?=(\.))/g).join("")]
+										}
 										alt="Extra Item"
 									/>
 									<div className="details--extra-price">{xItem.xPrice}$</div>
@@ -53,7 +55,7 @@ function DetailsContainer({ extras, extrasImgs, table, tableImgUrl }) {
 							</div>
 							<div id="tId">ID: {table.tId}</div>
 						</div>
-						<img src={tableImgUrl} alt="Table"></img>
+						<img src={tableImgUrl} alt="Table" />
 					</div>
 					<div className="details-label">TABLE</div>
 				</div>

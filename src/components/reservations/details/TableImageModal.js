@@ -9,7 +9,6 @@ function TableImageModal({
 	tSeats,
 }) {
 	function getClassNameHandler(e) {
-		console.log(e.target.className);
 		if (e.target.className === "table-modal-img") return;
 		tableImgCloseHandler();
 	}

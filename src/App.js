@@ -17,6 +17,7 @@ import {
 import { Routes, Route, Navigate } from "react-router-dom";
 import ManageRestaurant from "./components/manager/restaurant/ManageRestaurant";
 import { auth } from "./firebase";
+import ManageTables from "./components/manager/tables/ManageTables";
 
 function App() {
 	const dispatch = useDispatch();
@@ -84,6 +85,7 @@ function App() {
 							element={<Navigate replace to="/reservations" />}
 						/>
 						<Route path="/reservations" element={<ReservationsList />} />
+						<Route path="/tables" element={<ManageTables />} />
 						<Route path="/extras" element={<ManageExtras />} />
 						<Route path="/restaurant" element={<ManageRestaurant />} />
 					</Routes>

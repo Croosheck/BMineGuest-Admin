@@ -175,7 +175,11 @@ function ManageExtras() {
 										key={index}
 										label={item.xName}
 										xPrice={item.xPrice}
-										url={extrasImages[item.xFileName.slice(0, -4)]}
+										url={
+											extrasImages[
+												item.xFileName.match(/^.*(?=(\.))/g).join("")
+											]
+										}
 										onDelete={(e) => onDeleteExtraHandler(e, item)}
 									/>
 								</CSSTransition>

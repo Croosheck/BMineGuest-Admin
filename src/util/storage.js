@@ -1,9 +1,8 @@
 import { auth, db, storage } from "../firebase";
-import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import { ref, uploadBytes } from "firebase/storage";
 import {
 	doc,
 	collection,
-	setDoc,
 	getDocs,
 	query,
 	onSnapshot,
@@ -33,7 +32,7 @@ export function getRealTimeReservations() {
 		collection(db, "restaurants", auth.currentUser.uid, "reservations")
 	);
 
-	const unsubscribe = onSnapshot(q, (querySnapshot) => {
+	onSnapshot(q, (querySnapshot) => {
 		availableRestaurants = [];
 		querySnapshot.forEach((doc) => {
 			availableRestaurants.push(doc.data());
@@ -78,4 +77,44 @@ export async function changeReservationStatus(
 			callRequest: callRequest,
 		}
 	);
+}
+
+export default async function uploadFile(image, type, data) {
+	let imageRef;
+
+	if (type === "addTable") {
+		imageRef = ref(
+			storage,
+			`restaurants/${auth.currentUser.uid}/tables/${data.tId}`
+		);
+	}
+
+	// if (type === "...") {
+	// 	imageRef = ref(
+	// 		storage,
+	// 		``
+	// 	);
+	// }
+
+	// if (data) {
+	// 	const postRef = doc(db, "posts", auth.currentUser.uid, "userPosts");
+
+	// 	setDoc(postRef, {
+	// 		title: data.title,
+	// 		description: data.description,
+	// 		address: data.address ? data.address : null,
+	// 		coords: data.coords
+	// 			? { lat: data.coords.lat, lng: data.coords.lng }
+	// 			: null,
+	// 		timestamp: Date.now(),
+	// 	});
+	// }
+
+	const response = await fetch(image);
+	const blob = await response.blob();
+
+	// Files uploading to Firebase Storage
+	await uploadBytes(imageRef, blob);
+
+	return { imageRef, blob };
 }

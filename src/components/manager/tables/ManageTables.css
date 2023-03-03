@@ -1,0 +1,29 @@
+.manageTables-container {
+	color: black;
+	background-color: rgb(255, 255, 255);
+	height: 100%;
+}
+
+.manageTables--new-table-container {
+	background-color: rgb(95, 114, 160);
+	width: 100%;
+	height: 20%;
+	display: flex;
+}
+.new-table-container--image-input {
+	border: 2px solid black;
+	height: min-content;
+	padding: 10px 0;
+}
+.new-table-container--image-input > legend {
+	margin-left: 10px;
+}
+.new-table-container--image-preview {
+	height: 100%;
+}
+
+.manageTables--tables-container {
+	background-color: rgb(110, 140, 146);
+	width: 100%;
+	height: 60%;
+}

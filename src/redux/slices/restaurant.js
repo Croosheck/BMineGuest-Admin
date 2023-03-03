@@ -16,9 +16,20 @@ export const getRestaurant = createAsyncThunk(
 	}
 );
 
+const name = "restaurant";
+const initialState = createInitialState();
+const reducers = createReducers();
+const extraReducers = createExtraReducers(getRestaurant);
+
 export const restaurantSlice = createSlice({
-	name: "restaurant",
-	initialState: {
+	name,
+	initialState,
+	reducers,
+	extraReducers,
+});
+
+function createInitialState() {
+	return {
 		currentRestaurant: "",
 		reservationData: {
 			extras: [],
@@ -26,8 +37,10 @@ export const restaurantSlice = createSlice({
 		},
 		reservationsList: [],
 		availableExtrasGlobal: [],
-	},
-	reducers: {
+	};
+}
+function createReducers() {
+	return {
 		realTimeReservations: (state, { payload }) => {
 			state.reservationsList = payload.map((reservation) => ({
 				...reservation,
@@ -67,13 +80,20 @@ export const restaurantSlice = createSlice({
 		resetPickedExtras: (state, { payload }) => {
 			state.availableExtrasGlobal = [...payload];
 		},
-	},
-	extraReducers: {
-		[getRestaurant.fulfilled]: (state, { payload }) => {
+	};
+}
+function createExtraReducers(thunk) {
+	return (builder) => {
+		const { fulfilled, pending, rejected } = thunk;
+
+		builder.addCase(fulfilled, (state, { payload }) => {
 			state.currentRestaurant = payload;
-		},
-	},
-});
+		});
+		builder.addCase(pending, (state) => {
+			state.currentRestaurant = null;
+		});
+	};
+}
 
 export const {
 	realTimeReservations,
