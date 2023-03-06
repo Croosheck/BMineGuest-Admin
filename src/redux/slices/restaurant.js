@@ -84,7 +84,7 @@ function createReducers() {
 }
 function createExtraReducers(thunk) {
 	return (builder) => {
-		const { fulfilled, pending, rejected } = thunk;
+		const { fulfilled, pending } = thunk;
 
 		builder.addCase(fulfilled, (state, { payload }) => {
 			state.currentRestaurant = payload;

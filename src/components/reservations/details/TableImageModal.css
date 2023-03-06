@@ -26,11 +26,18 @@
 	position: absolute;
 	top: 0;
 	right: 0;
-	background-color: black;
-	padding: 5px 10px;
-	font-weight: 700;
-	align-self: center;
 	cursor: pointer;
+	margin: 10px 10px 0 0;
+	padding: 4px 4px;
+	background-color: rgba(0, 0, 0, 0.437);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 8px;
+	transition: ease-in-out 0.1s;
+}
+#table-modal--close:hover {
+	background-color: rgba(0, 0, 0, 0.69);
 }
 .table-image--modal-container > img {
 	width: 100%;
@@ -54,6 +61,8 @@
 	font-weight: 600;
 	border-radius: 0 0 5px 5px;
 }
+
+/* TEXT FIELDS */
 .modal--table-details > p {
 	margin: 0 5px;
 }

@@ -47,7 +47,7 @@ function ManageExtras() {
 			setAvailableExtras([]);
 			const querySnapshot = await getDocs(qAvailExtras);
 			querySnapshot.forEach(async (doc) => {
-				const extraImg = ref(storage, `extras/${doc.id}.png`);
+				const extraImg = ref(storage, `extras/${doc.data().xFilename}`);
 				const extraImgUrl = await getDownloadURL(extraImg);
 				setExtrasImages((prev) => ({ ...prev, [doc.id]: extraImgUrl }));
 

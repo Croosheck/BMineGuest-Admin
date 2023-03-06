@@ -7,6 +7,7 @@ import {
 	query,
 	onSnapshot,
 	updateDoc,
+	arrayUnion,
 } from "firebase/firestore";
 
 export async function getReservations() {
@@ -81,34 +82,19 @@ export async function changeReservationStatus(
 
 export default async function uploadFile(image, type, data) {
 	let imageRef;
+	const restaurantRef = doc(db, "restaurants", auth.currentUser.uid);
 
 	if (type === "addTable") {
 		imageRef = ref(
 			storage,
 			`restaurants/${auth.currentUser.uid}/tables/${data.tId}`
 		);
+
+		// Inserts a new table object into firebase restaurant doc array
+		await updateDoc(restaurantRef, {
+			tables: arrayUnion(data),
+		});
 	}
-
-	// if (type === "...") {
-	// 	imageRef = ref(
-	// 		storage,
-	// 		``
-	// 	);
-	// }
-
-	// if (data) {
-	// 	const postRef = doc(db, "posts", auth.currentUser.uid, "userPosts");
-
-	// 	setDoc(postRef, {
-	// 		title: data.title,
-	// 		description: data.description,
-	// 		address: data.address ? data.address : null,
-	// 		coords: data.coords
-	// 			? { lat: data.coords.lat, lng: data.coords.lng }
-	// 			: null,
-	// 		timestamp: Date.now(),
-	// 	});
-	// }
 
 	const response = await fetch(image);
 	const blob = await response.blob();

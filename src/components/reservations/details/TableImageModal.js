@@ -1,11 +1,12 @@
 import "./TableImageModal.css";
+import { VscChromeClose } from "react-icons/vsc";
 
 function TableImageModal({
-	tableModalVisible,
-	onModalClose,
-	tableImgUrl,
-	tId,
-	tPlacement,
+	tableModalVisible = Boolean(),
+	onModalClose = () => {},
+	tableImgUrl = String(),
+	tId = String(),
+	tPlacement = String(),
 	tSeats,
 }) {
 	function getClassNameHandler(e) {
@@ -14,13 +15,15 @@ function TableImageModal({
 	}
 
 	function tableImgCloseHandler() {
-		onModalClose();
-
 		document.removeEventListener("click", getClassNameHandler);
+
+		onModalClose();
 	}
 	function onBackdropClickHandler() {
 		document.addEventListener("click", getClassNameHandler);
 	}
+
+	const isTextData = Boolean(tSeats && tPlacement && tId);
 
 	return (
 		<>
@@ -31,13 +34,22 @@ function TableImageModal({
 				>
 					<div className="table-image--modal-container">
 						<div id="table-modal--close" onClick={tableImgCloseHandler}>
-							X
+							<VscChromeClose color="#FFFFFF" size={26} />
 						</div>
 						<img className="table-modal-img" src={tableImgUrl} alt="Table" />
-						<div className="modal--table-details">
-							<p>Seats: {tSeats}</p>
-							<p>{tPlacement}</p>
-							<p>ID: {tId}</p>
+						<div
+							className="modal--table-details"
+							style={{
+								padding: !isTextData && 0,
+							}}
+						>
+							{isTextData && (
+								<>
+									<p>Seats: {tSeats}</p>
+									<p>{tPlacement}</p>
+									<p>ID: {tId}</p>
+								</>
+							)}
 						</div>
 					</div>
 				</div>
