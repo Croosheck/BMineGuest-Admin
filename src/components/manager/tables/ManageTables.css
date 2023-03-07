@@ -35,31 +35,6 @@
 	position: relative;
 	/* background-color: rgba(119, 121, 129, 0.245); */
 }
-/* TOP RIGHT CONTAINER (PREVIEW) */
-.new-table-outer-container--image-container {
-	max-width: 30%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding: 10px;
-	border: 2px solid black;
-	background-color: rgb(255, 255, 255);
-
-	flex-direction: column;
-}
-.new-table-outer-container--image-container > button {
-	min-width: 50%;
-	height: 30px;
-	border: none;
-	margin: 10px 0;
-	cursor: pointer;
-	background-color: hsl(33, 100%, 88%);
-	transition: all 0.1s;
-	border-radius: 5px;
-}
-.new-table-outer-container--image-container > button:hover {
-	background-color: hsl(33, 100%, 80%);
-}
 
 /* GENERAL STYLING */
 .new-table-outer-container--new-table-container > fieldset {
@@ -101,25 +76,7 @@
 .new-table-container--image-input > legend {
 }
 
-/* IMAGE PREVIEW */
-.new-table-outer-container--image-preview {
-	max-width: 100%;
-	cursor: pointer;
-}
-
 @media only screen and (width < 520px) {
-	.new-table-outer-container--image-container {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		min-height: 0;
-		padding: 10px;
-
-		max-width: none;
-	}
-	.new-table-outer-container--image-preview {
-		max-width: 100%;
-	}
 	.new-table-outer-container {
 		flex-direction: column;
 		justify-content: center;

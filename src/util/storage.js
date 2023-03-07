@@ -91,9 +91,9 @@ export default async function uploadFile(image, type, data) {
 		);
 
 		// Inserts a new table object into firebase restaurant doc array
-		await updateDoc(restaurantRef, {
-			tables: arrayUnion(data),
-		});
+		// await updateDoc(restaurantRef, {
+		// 	tables: arrayUnion(data),
+		// });
 	}
 
 	const response = await fetch(image);

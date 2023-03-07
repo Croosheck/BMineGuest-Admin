@@ -37,6 +37,10 @@ function createInitialState() {
 		},
 		reservationsList: [],
 		availableExtrasGlobal: [],
+		newTableBase64ImageData: {
+			img: "",
+			imgExt: "",
+		},
 	};
 }
 function createReducers() {
@@ -80,6 +84,9 @@ function createReducers() {
 		resetPickedExtras: (state, { payload }) => {
 			state.availableExtrasGlobal = [...payload];
 		},
+		setNewTableBase64ImageData: (state, { payload }) => {
+			state.newTableBase64ImageData = payload;
+		},
 	};
 }
 function createExtraReducers(thunk) {
@@ -103,6 +110,7 @@ export const {
 	resetAvailableExtrasGlobal,
 	pickedExtra,
 	resetPickedExtras,
+	setNewTableBase64ImageData,
 } = restaurantSlice.actions;
 
 export default restaurantSlice.reducer;

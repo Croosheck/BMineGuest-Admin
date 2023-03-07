@@ -6,13 +6,12 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { auth, db } from "../../../firebase";
 import TableImageModal from "../../reservations/details/TableImageModal";
 
-import ReactCrop from "react-image-crop";
 import "react-image-crop/dist/ReactCrop.css";
-import {
-	base64StringtoFile,
-	extractImageFileExtensionFromBase64,
-	image64toCanvasRef,
-} from "../../../util/base64Reusable";
+import { extractImageFileExtensionFromBase64 } from "../../../util/base64Reusable";
+import { useDispatch, useSelector } from "react-redux";
+import { setNewTableBase64ImageData } from "../../../redux/slices/restaurant";
+import { filteredKeys } from "./utils/reusable";
+import ImagePreview from "./newTable/ImagePreview";
 
 function ManageTables() {
 	const [restaurantTables, setRestaurantTables] = useState([]);
@@ -38,8 +37,12 @@ function ManageTables() {
 		img: "",
 		imgExt: "",
 	});
-	const [crop, setCrop] = useState();
-	const [completedCrop, setCompletedCrop] = useState();
+
+	const { newTableBase64ImageData } = useSelector(
+		(state) => state.restaurantReducer
+	);
+
+	const dispatch = useDispatch();
 
 	const pickedImageRef = useRef();
 	const imagePreviewCanvasRef = useRef();
@@ -70,11 +73,7 @@ function ManageTables() {
 		return newTableId;
 	}
 
-	async function addNewTableHandler(
-		data = {
-			...newTableData,
-		}
-	) {
+	async function addNewTableHandler() {
 		const newTableId = renameNewTable(restaurantTables);
 
 		setNewTableData((prev) => ({
@@ -82,17 +81,10 @@ function ManageTables() {
 			...inputValue,
 		}));
 
-		//cropped image
-		const canvasRef = imagePreviewCanvasRef.current;
-		const imageData64 = canvasRef.toDataURL("image/" + base64Image.imgExt);
-		const croppedImg = URL.createObjectURL(
-			base64StringtoFile(imageData64, newTableId)
-		);
-
 		//Insert the table image into the Storage
 		await uploadFile(
 			// data.image,
-			croppedImg,
+			newTableBase64ImageData.img,
 			"addTable",
 			{
 				tId: newTableId,
@@ -104,18 +96,6 @@ function ManageTables() {
 				...inputValue,
 			}
 		);
-	}
-
-	function filteredKeys(e, type = "numbersOnly") {
-		if (!/[0-9]/.test(e.key) && type === "numbersOnly") {
-			e.preventDefault();
-		}
-		if (!/[a-zA-Z]/.test(e.key) && type === "lettersOnly") {
-			e.preventDefault();
-		}
-		if (!/[a-zA-Z\s]/.test(e.key) && type === "lettersAndSpaces") {
-			e.preventDefault();
-		}
 	}
 
 	function inputFieldHandler(e, type) {
@@ -164,8 +144,19 @@ function ManageTables() {
 			return;
 		}
 	}
+
+	function onImageInputChange(e) {
+		imageToBase64Handler(e.currentTarget.files[0]);
+
+		const imgURL = URL.createObjectURL(...e.currentTarget.files);
+
+		setNewTableData((prev) => ({
+			...prev,
+			image: imgURL,
+		}));
+	}
+
 	function imageToBase64Handler(file) {
-		// imageBase64Data
 		const currentFile = file;
 		const myFileItemReader = new FileReader();
 		myFileItemReader.addEventListener("load", () => {
@@ -174,19 +165,30 @@ function ManageTables() {
 				img: myResult,
 				imgExt: extractImageFileExtensionFromBase64(myResult),
 			});
+
+			dispatch(
+				setNewTableBase64ImageData({
+					img: myResult,
+					imgExt: extractImageFileExtensionFromBase64(myResult),
+				})
+			);
 		});
 		myFileItemReader.readAsDataURL(currentFile);
 	}
 
-	function onChangeCropHandler(crop) {
-		setCrop(crop);
+	function onCropClickHandler() {
+		setImageModal({
+			isVisible: true,
+			imgUrl: newTableData.image,
+		});
 	}
-
-	function onCompleteCropHandler(crop, pixelCrop) {
-		const canvasRef = imagePreviewCanvasRef.current;
-		const imgSrc = base64Image.img;
-
-		image64toCanvasRef(canvasRef, imgSrc, crop, pickedImageRef);
+	function onResetClickHandler() {
+		dispatch(
+			setNewTableBase64ImageData({
+				img: base64Image.img,
+				imgExt: base64Image.imgExt,
+			})
+		);
 	}
 
 	return (
@@ -196,6 +198,11 @@ function ManageTables() {
 					tableModalVisible={true}
 					tableImgUrl={newTableData.image}
 					onModalClose={() => setImageModal({ isVisible: false, imgUrl: null })}
+					mode="crop"
+					forCropData={{
+						base64Img: base64Image.img,
+						imgExt: base64Image.imgExt,
+					}}
 				/>
 			)}
 			<div className="manageTables--new-table-outer-container">
@@ -205,18 +212,9 @@ function ManageTables() {
 							<legend>Table Image:</legend>
 							<input
 								type="file"
-								// capture="environment"
 								accept="image/*"
 								name="picture"
-								onChange={(e) => {
-									imageToBase64Handler(e.currentTarget.files[0]);
-
-									const imgURL = URL.createObjectURL(...e.currentTarget.files);
-									setNewTableData((prev) => ({
-										...prev,
-										image: imgURL,
-									}));
-								}}
+								onChange={(e) => onImageInputChange(e)}
 							/>
 						</fieldset>
 
@@ -260,41 +258,18 @@ function ManageTables() {
 						</fieldset>
 					</div>
 					{newTableData.image && (
-						<div className="new-table-outer-container--image-container">
-							<ReactCrop
-								crop={crop}
-								onChange={onChangeCropHandler}
-								onComplete={onCompleteCropHandler}
-							>
-								<img
-									className="new-table-outer-container--image-preview"
-									// src={newTableData.image}
-									src={base64Image.img}
-									alt="Picked table"
-									ref={pickedImageRef}
-								/>
-							</ReactCrop>
-							<button
-								onClick={() =>
-									setImageModal({
-										isVisible: true,
-										imgUrl: newTableData.image,
-									})
-								}
-							>
-								Preview
-							</button>
-							<canvas ref={imagePreviewCanvasRef} />
-						</div>
+						<ImagePreview
+							pickedImageSrc={newTableBase64ImageData.img}
+							pickedImageRef={pickedImageRef}
+							onCropClick={onCropClickHandler}
+							onResetClick={onResetClickHandler}
+							canvasRef={imagePreviewCanvasRef}
+						/>
 					)}
 				</div>
 			</div>
 			<div className="manageTables--new-table-submit-button">
-				<button
-					onClick={() => {
-						// addNewTableHandler(newTableData);
-					}}
-				>
+				<button onClick={addNewTableHandler.bind(this, newTableData)}>
 					Submit
 				</button>
 			</div>

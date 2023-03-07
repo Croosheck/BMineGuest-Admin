@@ -1,0 +1,70 @@
+.new-table-outer-container--image-container {
+	--imagePreview-container-minWidth: 14rem;
+
+	min-width: var(--imagePreview-container-minWidth);
+	max-width: 35%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	border: 0.08rem solid black;
+	background-color: rgb(255, 255, 255);
+
+	flex-direction: column;
+}
+.new-table-outer-container--image-preview {
+	max-width: 100%;
+}
+.newTable-image--buttons-container {
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	padding: 5px 0;
+}
+.newTable-image--buttons-container > button {
+	font-weight: 600;
+	font-size: 1rem;
+	width: 35%;
+	min-width: calc(var(--imagePreview-container-minWidth) * 0.4);
+	height: 30px;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.15s;
+	box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.22);
+	text-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
+}
+.newTable-image--buttons-container > button:hover {
+	color: white;
+}
+.newTable-image--crop-button {
+	background-color: hsl(219, 100%, 86%);
+}
+.newTable-image--crop-button:hover {
+	background-color: hsl(219, 100%, 80%);
+}
+.newTable-image--reset-button {
+	background-color: hsl(0, 100%, 86%);
+}
+.newTable-image--reset-button:hover {
+	background-color: hsl(0, 100%, 80%);
+}
+.manageTable--canvas-preview {
+	max-width: 100%;
+	max-height: 200px;
+	display: none;
+}
+
+@media only screen and (width < 520px) {
+	.new-table-outer-container--image-container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		min-height: 0;
+		padding: 10px;
+		max-width: none;
+	}
+	.new-table-outer-container--image-preview {
+		max-width: 100%;
+	}
+}
