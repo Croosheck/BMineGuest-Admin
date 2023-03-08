@@ -65,7 +65,9 @@ function ReservationsList() {
 		const tablesList = await listAll(tablesImgsRef);
 
 		tablesList.items.forEach(async (table) => {
-			const tableId = table.name.match(/^.*(?=(\.))/g).join("");
+			const tableId = table.name.includes(".")
+				? table.name.match(/^.*(?=(\.))/g).join("")
+				: table.name;
 
 			const tableImgRef = ref(
 				storage,

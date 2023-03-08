@@ -3,6 +3,7 @@ import "./ImagePreview.css";
 function ImagePreview({
 	onCropClick = () => {},
 	onResetClick = () => {},
+	onImgLoad = () => {},
 	pickedImageSrc,
 	pickedImageRef,
 	canvasRef,
@@ -14,6 +15,7 @@ function ImagePreview({
 				src={pickedImageSrc}
 				ref={pickedImageRef}
 				alt="Picked table"
+				onLoad={onImgLoad}
 			/>
 			<div className="newTable-image--buttons-container">
 				<button onClick={onCropClick} className="newTable-image--crop-button">

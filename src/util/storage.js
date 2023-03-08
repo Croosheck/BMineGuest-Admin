@@ -1,5 +1,10 @@
 import { auth, db, storage } from "../firebase";
-import { ref, uploadBytes } from "firebase/storage";
+import {
+	deleteObject,
+	ref,
+	uploadBytes,
+	uploadBytesResumable,
+} from "firebase/storage";
 import {
 	doc,
 	collection,
@@ -8,6 +13,8 @@ import {
 	onSnapshot,
 	updateDoc,
 	arrayUnion,
+	FieldValue,
+	arrayRemove,
 } from "firebase/firestore";
 
 export async function getReservations() {
@@ -82,6 +89,8 @@ export async function changeReservationStatus(
 
 export default async function uploadFile(image, type, data) {
 	let imageRef;
+	let uploadStatus;
+
 	const restaurantRef = doc(db, "restaurants", auth.currentUser.uid);
 
 	if (type === "addTable") {
@@ -100,7 +109,52 @@ export default async function uploadFile(image, type, data) {
 	const blob = await response.blob();
 
 	// Files uploading to Firebase Storage
-	await uploadBytes(imageRef, blob);
+	const uploadTask = uploadBytesResumable(imageRef, blob);
 
-	return { imageRef, blob };
+	uploadTask.on(
+		"state_changed",
+		(snapshot) => {},
+		(error) => {
+			// Handle unsuccessful uploads
+		},
+		() => {
+			// Handle successful uploads on complete
+			const storageTimeout = setTimeout(async () => {
+				await updateDoc(restaurantRef, {
+					tables: arrayUnion(data),
+				});
+				return clearTimeout(storageTimeout);
+			}, 500);
+		}
+	);
+
+	return { imageRef, blob, uploadStatus, uploadTask };
+}
+
+export function deleteTableImage({
+	filename = String(),
+	successCallback = () => {},
+	data = {},
+}) {
+	const tableDataRef = doc(db, `restaurants`, auth.currentUser.uid);
+
+	const tableImageRef = ref(
+		storage,
+		`restaurants/${auth.currentUser.uid}/tables/${filename}`
+	);
+
+	// Delete the file
+	deleteObject(tableImageRef)
+		.then(async () => {
+			// File deleted successfully
+			await updateDoc(tableDataRef, {
+				tables: arrayRemove(data),
+			});
+
+			successCallback();
+		})
+		.catch((error) => {
+			// Uh-oh, an error occurred!
+			console.log(error);
+		});
 }

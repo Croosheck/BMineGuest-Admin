@@ -1,20 +1,18 @@
 import { useState } from "react";
 import "./DetailsContainer.css";
-import TableImageModal from "./TableImageModal";
+import PreviewCropModal from "../../UI/previewCropModal/PreviewCropModal";
 
 function DetailsContainer({ extras, extrasImgs, table, tableImgUrl }) {
 	const [tableModalVisible, setTableModalVisible] = useState(false);
 
 	function onTableImgClickHandler() {
-		// if (window.innerWidth <= 580) {
 		setTableModalVisible(true);
-		// }
 	}
 
 	return (
 		<>
 			{tableModalVisible && (
-				<TableImageModal
+				<PreviewCropModal
 					tableModalVisible={tableModalVisible}
 					onModalClose={() => setTableModalVisible(false)}
 					tableImgUrl={tableImgUrl}

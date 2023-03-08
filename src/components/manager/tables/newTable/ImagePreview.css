@@ -1,3 +1,14 @@
+@keyframes imagePreview {
+	from {
+		scale: 0;
+		opacity: 0;
+	}
+	to {
+		scale: 1;
+		opacity: 1;
+	}
+}
+
 .new-table-outer-container--image-container {
 	--imagePreview-container-minWidth: 14rem;
 
@@ -9,11 +20,17 @@
 	padding: 10px;
 	border: 0.08rem solid black;
 	background-color: rgb(255, 255, 255);
-
 	flex-direction: column;
+	margin: 1rem 0;
+	scale: 0;
+	opacity: 0;
+
+	animation: imagePreview 0.5s forwards;
 }
 .new-table-outer-container--image-preview {
-	max-width: 100%;
+	max-width: 80%;
+	max-height: 90%;
+	margin-bottom: 1rem;
 }
 .newTable-image--buttons-container {
 	width: 100%;
