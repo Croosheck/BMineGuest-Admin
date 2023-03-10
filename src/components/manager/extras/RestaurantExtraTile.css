@@ -1,3 +1,13 @@
+@keyframes restaurantExtraItem {
+	from {
+		opacity: 0;
+		scale: 0.5;
+	}
+	to {
+		opacity: 0.7;
+		scale: 1;
+	}
+}
 .restaurant-extras-item {
 	position: relative;
 	box-sizing: border-box;
@@ -10,14 +20,22 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	opacity: 0.7;
-	transition: 0.2s ease-in-out;
-	scale: 0.9;
+	opacity: 0;
+	scale: 0;
+	transition: ease-in-out 0.2s;
 
-	animation: availableExtraItem 1s;
+	animation-name: restaurantExtraItem;
+	animation-fill-mode: forwards;
+	animation-duration: 0.2s;
 
 	cursor: default;
 }
+
+.restaurant-extras-item:hover {
+	opacity: 1 !important;
+	scale: 1 !important;
+}
+
 @media (max-width: 1020px) {
 	.restaurant-extras-item {
 		width: 30%;
@@ -29,11 +47,6 @@
 		width: 40%;
 		margin: 2% 5%;
 	}
-}
-
-.restaurant-extras-item:hover {
-	opacity: 1;
-	scale: 1;
 }
 
 /* Dropdown */

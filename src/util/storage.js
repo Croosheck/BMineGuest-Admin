@@ -158,3 +158,22 @@ export function deleteTableImage({
 			console.log(error);
 		});
 }
+
+export async function updateTable({
+	arrayOldData = [],
+	itemId = "",
+	updatedItem = {},
+}) {
+	const itemToUpdateIndex = arrayOldData.findIndex(
+		(item) => item.tId === itemId
+	);
+
+	const updatedArray = [...arrayOldData];
+	updatedArray[itemToUpdateIndex] = updatedItem;
+
+	const restaurantRef = doc(db, "restaurants", auth.currentUser.uid);
+
+	await updateDoc(restaurantRef, {
+		tables: updatedArray,
+	});
+}

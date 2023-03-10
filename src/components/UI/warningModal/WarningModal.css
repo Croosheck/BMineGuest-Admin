@@ -1,0 +1,99 @@
+.warning-modal--backdrop {
+	min-width: 100%;
+	min-height: 100%;
+
+	position: fixed;
+	top: 0;
+	background-color: rgba(0, 0, 0, 0.536);
+	backdrop-filter: blur(3px);
+	z-index: 2;
+}
+
+@keyframes warningModal {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+.warning-modal--content-container {
+	width: 70%;
+	max-width: 34rem;
+	min-width: 18rem;
+	height: 35%;
+	min-height: 17rem;
+	background-color: hsl(34, 78%, 91%);
+	background: linear-gradient(
+		135deg,
+		hsl(34, 78%, 70%),
+		hsl(34, 78%, 85%),
+		hsl(34, 78%, 95%) 120%
+	);
+	position: absolute;
+	inset: 0;
+	margin: auto auto;
+	padding: 10px;
+	border-radius: 10px;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	animation: warningModal 0.5s;
+}
+
+.warning-modal--title-container {
+	flex: 0.6;
+}
+.warning-modal--title-container > pre {
+	color: black;
+	margin-top: 3rem;
+	text-align: center;
+	font-size: 1.25rem;
+	font-weight: 600;
+	line-height: 1.5rem;
+	letter-spacing: 0.5px;
+	font-family: "Lucida Sans";
+	text-shadow: 2px 2px 3px rgba(255, 255, 255, 0.475);
+
+	word-wrap: break-word;
+	page-break-inside: avoid;
+	white-space: pre-wrap;
+}
+.warning-modal--buttons-container {
+	flex: 0.4;
+	display: flex;
+	align-items: center;
+	min-width: 100%;
+}
+.warning-modal--buttons-container > button {
+	border: none;
+	margin: 0 auto;
+	padding: 0.7rem 1.5rem;
+	border-radius: 10px;
+	cursor: pointer;
+	background-color: hsl(0, 0%, 95%);
+	font-size: 1.2rem;
+	font-weight: 600;
+	transition: ease 0.15s;
+	filter: drop-shadow(0 0 5px rgb(255, 255, 255));
+	border: 2px solid hsl(0, 0%, 90%);
+	opacity: 0.8;
+}
+.warning-modal--buttons-container > button:hover {
+	background-color: hsl(0, 0%, 100%);
+	opacity: 1;
+}
+.warning-modal--buttons-container > button:active {
+	background-color: hsl(0, 0%, 95%);
+	color: hsl(0, 0%, 0%);
+}
+.warning-modal--buttons-container > #cancel {
+}
+.warning-modal--buttons-container > #delete:hover {
+	color: rgb(255, 74, 74);
+	text-shadow: 0px 0px 5px rgba(189, 0, 0, 0.3);
+}

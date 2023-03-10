@@ -132,6 +132,7 @@ function ManageExtras() {
 						{availableExtrasGlobal.map((item, index) => {
 							return (
 								<AvailableExtraTile
+									index={index}
 									key={index}
 									label={item.xName}
 									url={item.xUrl}
@@ -172,6 +173,8 @@ function ManageExtras() {
 									classNames="pickedExtra"
 								>
 									<RestaurantExtraTile
+										itemsTotal={restaurantExtras.length}
+										index={index}
 										key={index}
 										label={item.xName}
 										xPrice={item.xPrice}

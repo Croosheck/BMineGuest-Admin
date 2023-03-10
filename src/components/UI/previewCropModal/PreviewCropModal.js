@@ -32,7 +32,6 @@ function PreviewCropModal({
 	},
 }) {
 	const [crop, setCrop] = useState();
-	const [isButtonActive, setIsButtonActive] = useState(false);
 	const [minImgSize, setMinImgSize] = useState({
 		w: 0,
 		h: 0,
@@ -45,8 +44,12 @@ function PreviewCropModal({
 
 	const isTextData = Boolean(tSeats && tPlacement && tId);
 
+	if (tableModalVisible) {
+		document.addEventListener("mousedown", getClassNameHandler);
+	}
+
 	function getClassNameHandler(e) {
-		if (e.target.className !== "modal--backdrop-container") return;
+		if (e?.target.className !== "modal--backdrop-container") return;
 
 		onCloseClickHandler();
 	}
@@ -56,10 +59,9 @@ function PreviewCropModal({
 		onModalClose();
 	}
 	function onBackdropClickHandler() {
-		document.addEventListener("mousedown", getClassNameHandler);
+		getClassNameHandler();
 	}
 
-	const buttonInactive = isButtonActive > 0 ? 1 : 0.2;
 	function onChangeCropHandler(crop, cropPercent) {
 		// const isRequiredCropMin = isRequiredCropMinHandler(cropPercent);
 		// setIsButtonActive(isRequiredCropMin);
@@ -166,7 +168,6 @@ function PreviewCropModal({
 										<button
 											className="modal--crop--submit-button"
 											onClick={crop && onSubmitCroppedImageHandler}
-											// style={{ opacity: buttonInactive }}
 										>
 											SUBMIT
 										</button>

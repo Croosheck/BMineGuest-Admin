@@ -14,7 +14,7 @@ import { checkImgSizeHandler, filteredKeys } from "./utils/reusable";
 import ImagePreview from "./newTable/ImagePreview";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 
-import TableCard from "./tablesList/TableCard";
+import TableCards from "./tablesList/TableCards";
 import { CSSTransition } from "react-transition-group";
 
 function ManageTables() {
@@ -401,8 +401,7 @@ function ManageTables() {
 				{!imageSize.isOk && imageSize.message && <h2>{imageSize.message}</h2>}
 			</div>
 			<h1 id="tables-title">Restaurant Tables</h1>
-
-			<TableCard restaurantTables={restaurantTables} tablesImgs={tablesImgs} />
+			<TableCards restaurantTables={restaurantTables} tablesImgs={tablesImgs} />
 		</>
 	);
 }

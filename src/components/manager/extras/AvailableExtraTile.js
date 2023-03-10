@@ -1,5 +1,6 @@
 import { useRef } from "react";
 import "./AvailableExtraTile.css";
+import placeholder from "../../../assets/imgs/imagePlaceholders/default.jpg";
 
 function AvailableExtraTile({ label, url, picked, onClick, onSubmit }) {
 	const priceRef = useRef();
@@ -7,7 +8,8 @@ function AvailableExtraTile({ label, url, picked, onClick, onSubmit }) {
 	const extraImage = url ? (
 		<img src={url} alt="Extra Item" />
 	) : (
-		<div className="extras-nofile">Image loading...</div>
+		// <div className="extras-nofile">Image loading...</div>
+		<img src={placeholder} alt="Extra Item" />
 	);
 
 	return (
