@@ -72,14 +72,14 @@
 	display: none;
 }
 
-@media only screen and (width < 520px) {
+@media only screen and (width < 670px) {
 	.new-table-outer-container--image-container {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		min-height: 0;
 		padding: 10px;
-		max-width: none;
+		max-width: 90%;
 	}
 	.new-table-outer-container--image-preview {
 		max-width: 100%;

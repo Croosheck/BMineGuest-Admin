@@ -71,9 +71,9 @@ function TableCards({
 				{restaurantTables.map((table, i) => {
 					const isAvailable = table.tAvailability;
 					const toggleShow = isAvailable ? (
-						<BiHide size={28} />
-					) : (
 						<BiShow size={28} />
+					) : (
+						<BiHide size={28} />
 					);
 					const inactive = !isAvailable ? "--inactive" : "";
 

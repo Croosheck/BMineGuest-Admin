@@ -1,5 +1,5 @@
 import "./Login.css";
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
@@ -15,8 +15,8 @@ function Login() {
 
 	async function submitHandler(e) {
 		e.preventDefault();
-		let enteredEmail = emailRef.current.value;
-		let enteredPassword = passwordRef.current.value;
+		const enteredEmail = emailRef.current.value;
+		const enteredPassword = passwordRef.current.value;
 
 		await signInWithEmailAndPassword(auth, enteredEmail, enteredPassword);
 	}

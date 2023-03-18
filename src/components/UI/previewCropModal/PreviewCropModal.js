@@ -44,22 +44,11 @@ function PreviewCropModal({
 
 	const isTextData = Boolean(tSeats && tPlacement && tId);
 
-	if (tableModalVisible) {
-		document.addEventListener("mousedown", getClassNameHandler);
-	}
-
-	function getClassNameHandler(e) {
-		if (e?.target.className !== "modal--backdrop-container") return;
-
-		onCloseClickHandler();
-	}
 	function onCloseClickHandler() {
-		document.removeEventListener("mousedown", getClassNameHandler);
-
 		onModalClose();
 	}
 	function onBackdropClickHandler() {
-		getClassNameHandler();
+		onCloseClickHandler();
 	}
 
 	function onChangeCropHandler(crop, cropPercent) {
@@ -118,7 +107,10 @@ function PreviewCropModal({
 					className="modal--backdrop-container"
 					onClick={onBackdropClickHandler}
 				>
-					<div className="table-image--modal-container">
+					<div
+						className="table-image--modal-container"
+						onClick={(e) => e.stopPropagation()}
+					>
 						{mode === "preview" && (
 							<div id="table-modal--close" onClick={onCloseClickHandler}>
 								<VscChromeClose color="#FFFFFF" size={26} />

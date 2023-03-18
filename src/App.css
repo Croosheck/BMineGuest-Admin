@@ -57,6 +57,7 @@ ul {
 }
 
 .app-container {
+	height: 100dvh;
 	height: 100vh;
 }
 
