@@ -1,23 +1,24 @@
 import "./App.css";
 import { getAuth, signOut } from "firebase/auth";
+import { auth } from "./firebase";
+
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import Login from "./components/auth/Login";
 import ReservationsList from "./components/reservations/ReservationsList";
 import Navbar from "./components/UI/Navbar";
 import ManageExtras from "./components/manager/extras/ManageExtras";
+import ManageRestaurant from "./components/manager/restaurant/ManageRestaurant";
+import ManageTables from "./components/manager/tables/ManageTables";
 
 import {
 	clearRestaurantData,
 	getRestaurant,
 	realTimeReservations,
 } from "./redux/slices/restaurant";
-
-import { Routes, Route, Navigate } from "react-router-dom";
-import ManageRestaurant from "./components/manager/restaurant/ManageRestaurant";
-import { auth } from "./firebase";
-import ManageTables from "./components/manager/tables/ManageTables";
+import { useDispatch } from "react-redux";
 
 function App() {
 	const dispatch = useDispatch();
