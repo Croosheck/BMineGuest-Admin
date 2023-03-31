@@ -140,9 +140,9 @@ function ReservationsList() {
 
 	const itemsList = reservationsList.map((reservation, index) => {
 		////// temporary
-		if (reservation.clientsEmail !== "111@111.com") {
-			return [];
-		}
+		// if (reservation.clientsEmail !== "111@111.com") {
+		// 	return [];
+		// }
 
 		return (
 			<CSSTransition key={reservation.filename} timeout={800} classNames="item">

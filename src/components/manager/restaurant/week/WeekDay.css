@@ -27,9 +27,12 @@
 
 	scroll-snap-align: center;
 }
-.week-day--container:hover {
-	scale: 1.05;
+@media (width >= 700px) {
+	.week-day--container:hover {
+		scale: 1.05;
+	}
 }
+
 .week-day--container h4 {
 	color: white;
 	margin: 0.2rem;

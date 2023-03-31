@@ -10,13 +10,15 @@
 	position: relative;
 }
 
-.week-schedule--container:hover > div {
-	scale: 0.95;
-	opacity: 0.5;
-}
-.week-schedule--container > div:hover {
-	scale: 1.1;
-	opacity: 1;
+@media (width >= 700px) {
+	.week-schedule--container:hover > div {
+		scale: 0.95;
+		opacity: 0.5;
+	}
+	.week-schedule--container > div:hover {
+		scale: 1.1;
+		opacity: 1;
+	}
 }
 
 .week-schedule--submit-button-container {
