@@ -15,6 +15,7 @@
 	flex-wrap: wrap;
 	justify-content: center;
 	overflow: auto;
+	overflow-x: hidden;
 }
 
 /* WEEK SCHEDULE */
