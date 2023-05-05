@@ -2,6 +2,7 @@
 .parcel-cache
 .env
 **/firebase.js
+**/devFuncs.js
 
 # production
 /build

@@ -20,6 +20,7 @@ import ReservationListItem from "./ReservationListItem";
 import { TransitionGroup, CSSTransition } from "react-transition-group";
 import { changeReservationStatus } from "../../util/storage";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
+import { addRestaurant } from "../../util/devFuncs";
 
 function ReservationsList() {
 	const [loaded, setLoaded] = useState(false);
@@ -191,6 +192,8 @@ function ReservationsList() {
 
 	return (
 		<div className="reservationsList-container">
+			{/* <button onClick={addRestaurant}>DEV</button> */}
+
 			{/* <div style={{ background: "#cccccc", height: 100, width: "100%" }}></div> */}
 			<TransitionGroup className="reservations-list" component="ul">
 				{reversedItemsList}
