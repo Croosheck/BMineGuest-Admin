@@ -18,7 +18,7 @@ import {
 	getRestaurant,
 	realTimeReservations,
 } from "./redux/slices/restaurant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
 	const dispatch = useDispatch();
@@ -26,7 +26,8 @@ function App() {
 		loaded: false,
 		loggedIn: false,
 	});
-	const [restaurantEmail, setRestaurantEmail] = useState();
+	const { currentRestaurant } = useSelector((state) => state.restaurantReducer);
+	const [restaurantEmail, setRestaurantEmail] = useState("");
 
 	useEffect(() => {
 		getAuth().onAuthStateChanged((user) => {
@@ -34,12 +35,11 @@ function App() {
 				setIsLoggedIn({ loaded: true, loggedIn: false });
 			}
 			if (user) {
-				setIsLoggedIn({ loaded: true, loggedIn: true });
+				dispatch(getRestaurant());
 				setRestaurantEmail(user.email);
+				setIsLoggedIn({ loaded: true, loggedIn: true });
 			}
 		});
-
-		dispatch(getRestaurant());
 	}, [dispatch]);
 
 	async function logoutHandler() {
@@ -79,7 +79,11 @@ function App() {
 		return (
 			<div className="app-container">
 				<div className="inner-container">
-					<Navbar name={restaurantEmail} onLogout={logoutHandler} />
+					<Navbar
+						email={restaurantEmail}
+						name={currentRestaurant?.name}
+						onLogout={logoutHandler}
+					/>
 					<Routes>
 						<Route
 							path="/*"

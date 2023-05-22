@@ -30,7 +30,7 @@ export const restaurantSlice = createSlice({
 
 function createInitialState() {
 	return {
-		currentRestaurant: "",
+		currentRestaurant: {},
 		reservationData: {
 			extras: [],
 			table: {},

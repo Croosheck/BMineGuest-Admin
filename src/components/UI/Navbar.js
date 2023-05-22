@@ -3,7 +3,7 @@ import "./Navbar.css";
 import { NavLink } from "react-router-dom";
 import Logout from "../../assets/icons/logout.svg";
 
-function Navbar({ onLogout, name }) {
+function Navbar({ onLogout = () => {}, name = "", email = "" }) {
 	const activeClass = "navbar-button navbar-button-active button-loggedin";
 	const dropdownActiveClass = "nav-dropContent-button nav-dropbtn-active";
 
@@ -21,9 +21,11 @@ function Navbar({ onLogout, name }) {
 
 	return (
 		<div className="navbar-container">
-			<div className="navbar-button restaurant-logo">
-				{name ? name : "Restaurant Name"}
+			<div className="restaurant-name-email">
+				<p className="restaurant--name">{name}</p>
+				<p className="restaurant--email">{email}</p>
 			</div>
+
 			{/* Production Helper */}
 			{/* <button onClick={() => addExtraHandler()}>CLICK</button> */}
 			<NavLink
